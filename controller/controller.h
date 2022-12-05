@@ -6,15 +6,13 @@
 namespace s21 {
 
 class Controller {
- private:
+private:
   s21::Model model;
 
- public:
-
-
+public:
   void reset();
 };
 
-}  //  namespace s21
+} //  namespace s21
 
 #endif
