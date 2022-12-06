@@ -4,8 +4,8 @@ FLAG =
 FLAG_C = -c 
 CL_11 = -std=c++17 -Wall -Wextra -Werror
 PR_NAME = s21_3D_Viewer_v2
-ALL_FILE_CC = ./model/model.cc ./controller/controller.cc
-ALL_FILE_H = ./model/model.h ./controller/controller.h
+ALL_FILE_CC = ./model/model.cc ./controller/controller.cc ./matrix_lib/S21_matrix_oop.cc
+ALL_FILE_H = ./model/model.h ./controller/controller.h ./matrix_lib/S21_matrix_oop.h
 ALL_FILE_O = model.o
 
 ifeq ($(OS), Darwin)
@@ -25,7 +25,7 @@ $(PR_NAME).a:
 	@ar rcs $(PR_NAME).a $(ALL_FILE_O) 
 
 test: $(PR_NAME).a
-	@$(CC) $(CL_11) ./unit_test/unit_test.cc ./model/model.cc -o tests.o -lgtest
+	@$(CC) $(CL_11) ./unit_test/unit_test.cc $(ALL_FILE_CC) -o tests.o -lgtest
 	@./tests.o
 
 gcov_report:

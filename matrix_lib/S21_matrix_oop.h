@@ -1,6 +1,7 @@
-#pragma once
-#include <math.h>
+#ifndef S21_MATRIX_OOP_H
+#define S21_MATRIX_OOP_H
 
+#include <math.h>
 #include <exception>
 #include <iostream>
 
@@ -46,3 +47,5 @@ private:
   int cols;
   double **matrix;
 };
+
+#endif  // S21_MATRIX_OOP_H

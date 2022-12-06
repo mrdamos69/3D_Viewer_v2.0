@@ -5,34 +5,29 @@
 TEST(Test_s21_3D_Viewer_v2_parser_with_file, test_1) {
   s21::Model some_data;
   std::string path_of_file = "../obj/Car.obj";
-  int error = some_data.count_vertexes_polygons(path_of_file);
-  if (error == 0) {
-    error = some_data.create_matrix_obj(path_of_file);
-    if (error == 0) {
-      error = some_data.note_vertexes_polygons(path_of_file);
-    }
-  }
-  ASSERT_EQ(error, 0);
+  ASSERT_EQ(true, some_data.count_vertexes_polygons(path_of_file));
+  ASSERT_EQ(true, some_data.create_matrix_obj(path_of_file));
+  ASSERT_EQ(true, some_data.note_vertexes_polygons(path_of_file));
 }
 
 // TEST(Test_s21_3D_Viewer_v2_n_v_p, test_1) {
 //   s21::Model some_data;
 //   std::string path_of_file = "../obj/Car.obj";
-//   int error = some_data.note_vertexes_polygons(path_of_file);
-//   ASSERT_EQ(error, 1);
+//   ASSERT_EQ(false, some_data.note_vertexes_polygons(path_of_file));
 // }
 
-// TEST(Test_s21_3D_Viewer_move_obj, test_1) {
-//   s21::Model some_data.data.matrix(3, 3);
-//   for (int i = 0; i < some_data.data.matrix.get_rows(); i++) 
-//     for (size_t j = 0; j < 3; j++)
-//       some_data.data.matrix(i, j) = 0;
+TEST(Test_s21_3D_Viewer_move_obj, test_1) {
+  
+  // s21::Model some_data(3, 3);
+  // for (int i = 0; i < some_data.data.matrix.get_rows(); i++) 
+  //   for (size_t j = 0; j < 3; j++)
+  //     some_data.data.matrix(i, j) = 0;
 
-//   test.move_obj(&some_data, 1, 1, 1);
-//   for (int i = 0; i < some_data.data.matrix.get_rows(); i++)
-//     for (size_t j = 0; j < 3; j++)
-//       ASSERT_DOUBLE_EQ(some_data.data.matrix(i, j), 1);
-// }
+  // test.move_obj(&some_data, 1, 1, 1);
+  // for (int i = 0; i < some_data.data.matrix.get_rows(); i++)
+  //   for (size_t j = 0; j < 3; j++)
+  //     ASSERT_DOUBLE_EQ(some_data.data.matrix(i, j), 1);
+}
 
 // TEST(Test_s21_3D_Viewer_scale_obj, test_1) {
 //   s21::Model some_data;

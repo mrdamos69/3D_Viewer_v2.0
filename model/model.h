@@ -1,24 +1,23 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <cmath>
 #include <fstream>
 #include <iostream>
-#include <list>
 #include <string>
 #include <cstring>
-#include <vector>
 
 #include "../matrix_lib/S21_matrix_oop.h"
 
 namespace s21 {
 
 struct polygon_t {
+  polygon_t() : vertexes(nullptr), numbers_of_vertexes_in_facets(0) {}
   int *vertexes;
   int numbers_of_vertexes_in_facets;
 };
 
 struct data_t {
+  data_t() : count_of_vertex(0), count_of_polygons(0) {}
   int count_of_vertex;
   int count_of_polygons;
   S21Matrix matrix;
@@ -28,16 +27,17 @@ struct data_t {
 class Model {
 
 public:
-  // Model() {};
-  Model(const Model &value);
+  Model() {};
+  Model(int rows, int cols);
+  // Model(const Model &value);
 
   int is_digit(char expression);
 
   /* functions for parsing .obj */
 
-  int count_vertexes_polygons(std::string &path_of_file);
-  int create_matrix_obj(std::string &path_of_file);
-  int note_vertexes_polygons(std::string &path_of_file);
+  bool count_vertexes_polygons(std::string &path_of_file);
+  bool create_matrix_obj(std::string &path_of_file);
+  bool note_vertexes_polygons(std::string &path_of_file);
 
   int help_funk_vertexes_polygons(std::string &lineptr, int &count_polygon);
 
@@ -55,4 +55,4 @@ public:
 
 } // namespace s21
 
-#endif
+#endif  // MODEL_H

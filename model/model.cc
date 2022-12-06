@@ -1,7 +1,12 @@
 #include "model.h"
 
-s21::Model::Model(const s21::Model &value) {
-  // this->data.matrix(value.data.matrix.get_rows(), value.data.matrix.get_cols())
+// s21::Model::Model(const s21::Model &value) {
+  
+// }
+
+s21::Model::Model(int rows, int cols) {
+    this->data.matrix.set_cols(cols);
+    this->data.matrix.set_cols(rows);
 }
 
 /**
@@ -24,8 +29,8 @@ int s21::Model::is_digit(char expression) {
  * @param path_of_file путь к объекту
  * @param some_data куда записываем данные
  */
-int s21::Model::count_vertexes_polygons(std::string &path_of_file) {
-  int error = 0;
+bool s21::Model::count_vertexes_polygons(std::string &path_of_file) {
+//   int error = 0;
   int cnt_vertexs = 0;
   int cnt_polygons = 0;
   this->data.count_of_vertex = 0;
@@ -34,7 +39,7 @@ int s21::Model::count_vertexes_polygons(std::string &path_of_file) {
   std::ifstream file(path_of_file);
   if (!file.eof()) {
     std::string lineptr;
-    size_t n;
+    // size_t n;
     while (std::getline(file, lineptr)) {
       if (lineptr[0] == 'v' && lineptr[1] != 'n' && lineptr[1] != 't') {
         cnt_vertexs++;
@@ -42,12 +47,13 @@ int s21::Model::count_vertexes_polygons(std::string &path_of_file) {
         cnt_polygons++;
       }
     }
-    error = 1;
+  } else {
+    return false;
   }
   file.close();
   this->data.count_of_vertex = cnt_vertexs;
   this->data.count_of_polygons = cnt_polygons;
-  return error;
+  return true;
 }
 
 /**
@@ -56,13 +62,13 @@ int s21::Model::count_vertexes_polygons(std::string &path_of_file) {
  * @param path_of_file путь к объекту
  * @param some_data куда записываем данные
  */
-int s21::Model::create_matrix_obj(std::string &path_of_file) {
-  int error = 0;
+bool s21::Model::create_matrix_obj(std::string &path_of_file) {
+//   int error = 0;
   std::ifstream file(path_of_file);
-  if (file) {
+  if (!file.eof()) {
     S21Matrix temp(this->data.count_of_vertex, 3);
     std::string lineptr;
-    size_t n;
+    // size_t n;
     int rows = 0, columns = 0;
     while (std::getline(file, lineptr)) {
       if (lineptr[0] == 'v' && lineptr[1] != 'n' && lineptr[1] != 't') {
@@ -93,20 +99,20 @@ int s21::Model::create_matrix_obj(std::string &path_of_file) {
       }
     }
   } else {
-    error = 1;
+    return false;
   }
   file.close();
-  return error;
+  return true;
 }
 
-int s21::Model::note_vertexes_polygons(std::string &path_of_file) {
-  int error = 0;
+bool s21::Model::note_vertexes_polygons(std::string &path_of_file) {
+//   int error = 0;
   this->data.polygons = new s21::polygon_t[this->data.count_of_polygons + 1];
   std::ifstream file(path_of_file);
   int count = 0;
-  if (file) {
+  if (!file.eof()) {
     std::string lineptr;
-    size_t n;
+    // size_t n;
     while (getline(file, lineptr)) {
       if (lineptr[0] == 'f') {
         for (size_t i = 1; lineptr[i]; i++) {
@@ -121,10 +127,10 @@ int s21::Model::note_vertexes_polygons(std::string &path_of_file) {
       }
     };
   } else {
-    error = 1;
+    return false;
   }
   file.close();
-  return error;
+  return true;
 }
 
 int s21::Model::help_funk_vertexes_polygons(std::string &lineptr,
