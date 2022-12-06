@@ -328,3 +328,9 @@ double &S21Matrix ::operator()(const int rows, const int cols) {
     throw "index outside the matrix";
   return this->matrix[rows][cols];
 }
+
+void S21Matrix::remove() {
+  for (int i = 0; i < this->rows; i++)
+    for (int j = 0; j < this->cols; j++)
+      this->matrix[i][j] = 0;
+}

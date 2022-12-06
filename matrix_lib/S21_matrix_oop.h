@@ -37,9 +37,9 @@ public:
   int get_rows();
   void set_cols(int cols);
   int get_cols();
-
   void gen_mtx();
   void gen_mtx_rev();
+  void remove();
 
 private:
   int rows;

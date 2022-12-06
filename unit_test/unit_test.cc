@@ -2,102 +2,73 @@
 
 #include "../model/model.h"
 
-TEST(Test_s21_3D_Viewer_v2, test_1) {
-  // ASSERT_EQ(result, 3.5);
+TEST(Test_s21_3D_Viewer_v2_parser_with_file, test_1) {
+  s21::Model some_data;
+  std::string path_of_file = "../obj/Car.obj";
+  int error = some_data.count_vertexes_polygons(path_of_file);
+  if (error == 0) {
+    error = some_data.create_matrix_obj(path_of_file);
+    if (error == 0) {
+      error = some_data.note_vertexes_polygons(path_of_file);
+    }
+  }
+  ASSERT_EQ(error, 0);
 }
 
-// START_TEST(test_parser_with_file) {
-//   char path_of_file[500] = "../obj/Car.obj";
-//   data_t some_data;
-//   int error = count_vertexes_polygons(path_of_file, &some_data);
-//   if (error == 0) {
-//     error = create_matrix_obj(path_of_file, &some_data);
-//     if (error == 0) {
-//       error = note_vertexes_polygons(path_of_file, &some_data);
-//       if (error == 0) {
-//         s21_remove_matrix(&some_data.matrix);
-//         for (int i = 0; i < some_data.count_of_polygons; i++)
-//           free(some_data.polygons[i].vertexes);
-//         free(some_data.polygons);
-//       }
-//     }
-//   }
-//   ck_assert_double_eq(error, 0);
+// TEST(Test_s21_3D_Viewer_v2_n_v_p, test_1) {
+//   s21::Model some_data;
+//   std::string path_of_file = "../obj/Car.obj";
+//   int error = some_data.note_vertexes_polygons(path_of_file);
+//   ASSERT_EQ(error, 1);
 // }
-// END_TEST
 
-// START_TEST(test_n_v_p) {
-//   char path_of_file[500] = "../obj/Car1.obj";
-//   data_t some_data;
-//   int error = note_vertexes_polygons(path_of_file, &some_data);
-//   ck_assert_double_eq(error, 1);
-//   for (int i = 0; i < some_data.count_of_polygons; i++)
-//     free(some_data.polygons[i].vertexes);
-//   free(some_data.polygons);
+// TEST(Test_s21_3D_Viewer_move_obj, test_1) {
+//   s21::Model some_data.data.matrix(3, 3);
+//   for (int i = 0; i < some_data.data.matrix.get_rows(); i++) 
+//     for (size_t j = 0; j < 3; j++)
+//       some_data.data.matrix(i, j) = 0;
+
+//   test.move_obj(&some_data, 1, 1, 1);
+//   for (int i = 0; i < some_data.data.matrix.get_rows(); i++)
+//     for (size_t j = 0; j < 3; j++)
+//       ASSERT_DOUBLE_EQ(some_data.data.matrix(i, j), 1);
 // }
-// END_TEST
 
-// START_TEST(move_obj_test) {
-//   data_t some_data;
+// TEST(Test_s21_3D_Viewer_scale_obj, test_1) {
+//   s21::Model some_data;
 //   s21_create_matrix(3, 3, &some_data.matrix);
-//   for (int i = 0; i < some_data.matrix.rows; i++) {
-//     some_data.matrix.matrix[i][0] = 0;
-//     some_data.matrix.matrix[i][1] = 0;
-//     some_data.matrix.matrix[i][2] = 0;
-//   }
-//   move_obj(&some_data, 1, 1, 1);
-//   for (int i = 0; i < some_data.matrix.rows; i++) {
-//     ck_assert_double_eq(some_data.matrix.matrix[i][0], 1);
-//     ck_assert_double_eq(some_data.matrix.matrix[i][1], 1);
-//     ck_assert_double_eq(some_data.matrix.matrix[i][2], 1);
-//   }
-//   s21_remove_matrix(&some_data.matrix);
-// }
-// END_TEST
+//   for (int i = 0; i < some_data.data.matrix.get_rows(); i++)
+//     for (size_t j = 0; j < 3; j++)
+//       some_data.data.matrix(i, j) = 1;
 
-// START_TEST(scale_obj_test) {
-//   data_t some_data;
-//   s21_create_matrix(3, 3, &some_data.matrix);
-//   for (int i = 0; i < some_data.matrix.rows; i++) {
-//     some_data.matrix.matrix[i][0] = 1;
-//     some_data.matrix.matrix[i][1] = 1;
-//     some_data.matrix.matrix[i][2] = 1;
-//   }
 //   scale_obj(&some_data, 2);
-//   for (int i = 0; i < some_data.matrix.rows; i++) {
-//     ck_assert_double_eq(some_data.matrix.matrix[i][0], 2);
-//     ck_assert_double_eq(some_data.matrix.matrix[i][1], 2);
-//     ck_assert_double_eq(some_data.matrix.matrix[i][2], 2);
-//   }
-//   s21_remove_matrix(&some_data.matrix);
+//   for (int i = 0; i < some_data.matrix.rows; i++)
+//     for (size_t j = 0; j < 3; j++)
+//       ASSERT_DOUBLE_EQ(some_data.data.matrix(i, j), 2);
 // }
-// END_TEST
 
 // START_TEST(rot_ox_test) {
-//   data_t some_data;
-//   s21_create_matrix(3, 3, &some_data.matrix);
-//   some_data.matrix.matrix[0][0] = 1;
-//   some_data.matrix.matrix[0][1] = 1;
-//   some_data.matrix.matrix[0][2] = 1;
-//   some_data.matrix.matrix[1][0] = 1;
-//   some_data.matrix.matrix[1][1] = 1;
-//   some_data.matrix.matrix[1][2] = 1;
-//   some_data.matrix.matrix[2][0] = 1;
-//   some_data.matrix.matrix[2][1] = 1;
-//   some_data.matrix.matrix[2][2] = 1;
-//   rotation_by_ox(&some_data, 0);
-//   ck_assert_double_eq(some_data.matrix.matrix[0][0], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[0][1], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[0][2], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[1][0], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[1][1], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[1][2], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[2][0], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[2][1], 1);
-//   ck_assert_double_eq(some_data.matrix.matrix[2][2], 1);
-//   s21_remove_matrix(&some_data.matrix);
+//   s21::Model some_data(3, 3);
+//   some_data.date.matrix[0][0] = 1;
+//   some_data.date.matrix[0][1] = 1;
+//   some_data.date.matrix[0][2] = 1;
+//   some_data.date.matrix[1][0] = 1;
+//   some_data.date.matrix[1][1] = 1;
+//   some_data.date.matrix[1][2] = 1;
+//   some_data.date.matrix[2][0] = 1;
+//   some_data.date.matrix[2][1] = 1;
+//   some_data.date.matrix[2][2] = 1;
+//   some_data.rotation_by_ox(&some_data, 0);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[0][0], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[0][1], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[0][2], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[1][0], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[1][1], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[1][2], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[2][0], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[2][1], 1);
+//   ASSERT_DOUBLE_EQ(some_data.date.matrix[2][2], 1);
 // }
-// END_TEST
 
 // START_TEST(rot_oy_test) {
 //   data_t some_data;
@@ -123,7 +94,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   ck_assert_double_eq(some_data.matrix.matrix[2][2], 1);
 //   s21_remove_matrix(&some_data.matrix);
 // }
-// END_TEST
 
 // START_TEST(rot_oz_test) {
 //   data_t some_data;
@@ -149,7 +119,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   ck_assert_double_eq(some_data.matrix.matrix[2][2], 1);
 //   s21_remove_matrix(&some_data.matrix);
 // }
-// END_TEST
 
 // START_TEST(test_parser_without_file) {
 //   char path_of_file[500] = "../obj/Car_no_file.obj";
@@ -164,7 +133,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   }
 //   ck_assert_double_eq(error, 1);
 // }
-// END_TEST
 
 // START_TEST(s21_sum_matrix_test) {
 //   matrix_t test1;
@@ -187,7 +155,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&result_by_func);
 //   s21_remove_matrix(&result_by_hands);
 // }
-// END_TEST
 
 // START_TEST(s21_sub_matrix_test) {
 //   matrix_t test1;
@@ -210,7 +177,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&result_by_func);
 //   s21_remove_matrix(&result_by_hands);
 // }
-// END_TEST
 
 // START_TEST(s21_mult_number_test) {
 //   matrix_t test1;
@@ -235,7 +201,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&result_by_func);
 //   s21_remove_matrix(&result_by_hands);
 // }
-// END_TEST
 
 // START_TEST(s21_mult_matrix_test) {
 //   matrix_t test1;
@@ -263,7 +228,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&result_by_func);
 //   s21_remove_matrix(&result_by_hands);
 // }
-// END_TEST
 
 // START_TEST(s21_transpose_test) {
 //   matrix_t test1;
@@ -287,7 +251,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&result_by_func);
 //   s21_remove_matrix(&result_by_hands);
 // }
-// END_TEST
 
 // START_TEST(s21_calc_complements_test) {
 //   matrix_t test, result_by_hands, result_by_func;
@@ -317,7 +280,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&result_by_hands);
 //   s21_remove_matrix(&result_by_func);
 // }
-// END_TEST
 
 // START_TEST(s21_determinant_test) {
 //   matrix_t test, result_by_hands;
@@ -344,7 +306,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&test);
 //   s21_remove_matrix(&result_by_hands);
 // }
-// END_TEST
 
 // START_TEST(s21_inverse_matrix_test) {
 //   matrix_t test, result_by_hands, result_by_func;
@@ -374,7 +335,6 @@ TEST(Test_s21_3D_Viewer_v2, test_1) {
 //   s21_remove_matrix(&result_by_hands);
 //   s21_remove_matrix(&result_by_func);
 // }
-// END_TEST
 
 int main(int argc, char *argv[]) {
   testing::InitGoogleTest(&argc, argv);
