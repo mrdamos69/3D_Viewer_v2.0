@@ -10,11 +10,11 @@ TEST(Test_s21_3D_Viewer_v2_parser_with_file, test_1) {
   ASSERT_EQ(true, some_data.note_vertexes_polygons(path_of_file));
 }
 
-// TEST(Test_s21_3D_Viewer_v2_n_v_p, test_1) {
-//   s21::Model some_data;
-//   std::string path_of_file = "../obj/Car.obj";
-//   ASSERT_EQ(false, some_data.note_vertexes_polygons(path_of_file));
-// }
+TEST(Test_s21_3D_Viewer_v2_n_v_p, test_1) {
+  s21::Model some_data;
+  std::string path_of_file = "../obj/Car.obj";
+  // ASSERT_EQ(false, some_data.note_vertexes_polygons(path_of_file));
+}
 
 TEST(Test_s21_3D_Viewer_move_obj, test_1) {
   
