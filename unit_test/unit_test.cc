@@ -3,17 +3,19 @@
 #include "../model/model.h"
 
 TEST(Test_s21_3D_Viewer_v2_parser_with_file, test_1) {
-  s21::Model some_data;
+  s21::Model test;
+  s21::data_t some_data;
   std::string path_of_file = "../obj/Car.obj";
-  ASSERT_EQ(true, some_data.count_vertexes_polygons(path_of_file));
-  ASSERT_EQ(true, some_data.create_matrix_obj(path_of_file));
-  ASSERT_EQ(true, some_data.note_vertexes_polygons(path_of_file));
+  ASSERT_EQ(true, test.count_vertexes_polygons(path_of_file, some_data));
+  ASSERT_EQ(true, test.create_matrix_obj(path_of_file, some_data));
+  ASSERT_EQ(true, test.note_vertexes_polygons(path_of_file, some_data));
 }
 
 TEST(Test_s21_3D_Viewer_v2_n_v_p, test_1) {
-  s21::Model some_data;
+  s21::Model test;
+  s21::data_t some_data;
   std::string path_of_file = "../obj/Car.obj";
-  // ASSERT_EQ(false, some_data.note_vertexes_polygons(path_of_file));
+  // ASSERT_EQ(false, test.note_vertexes_polygons(path_of_file, some_data));
 }
 
 TEST(Test_s21_3D_Viewer_move_obj, test_1) {
