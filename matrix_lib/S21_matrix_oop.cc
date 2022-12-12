@@ -228,27 +228,46 @@ void S21Matrix::gen_mtx_rev() {
 }
 
 void S21Matrix::set_rows(int rows) {
-  if (rows > 0 && rows != this->rows) {
-    S21Matrix result(rows, this->cols);
-    for (int i = 0; (i < rows) && (i < this->rows); i++)
-      for (int j = 0; j < this->cols; j++)
-        result(i, j) = this->matrix[i][j];
-    *this = result;
+  if (rows <= 0) {
+    throw std::length_error("Rows is less or equal 0");
   }
+  S21Matrix temp(rows, this->cols);
+  int min_rows = (rows < this->rows) ? rows : this->rows;
+
+  for (int i = 0; i < min_rows; i++) {
+    for (int j = 0; j < this->cols; j++) {
+      temp.matrix[i][j] = this->matrix[i][j];
+    }
+  }
+  *this = temp;
+}
+
+void S21Matrix::set_cols(int columns) {
+  if (columns <= 0) {
+    throw std::length_error("Rows is less or equal 0");
+  }
+  S21Matrix temp(this->rows, columns);
+  if (columns < this->cols) {
+    this->cols = columns;
+  }
+  for (int i = 0; i < this->rows; i++) {
+    for (int j = 0; j < this->cols; j++) {
+      temp.matrix[i][j] = this->matrix[i][j];
+    }
+  }
+  *this = temp;
+}
+void S21Matrix::set_rows_cols(int rows, int cols) {
+    if (rows > 0 && cols > 0 && rows != this->rows && cols != this->cols) {
+        S21Matrix result(rows, cols);
+        for (int i = 0; (i < rows) && (i < this->rows); i++)
+            for (int j = 0; (j < cols) && (j < this->cols); j++)
+                result(i, j) = this->matrix[i][j];
+        *this = result;
+    }
 }
 
 int S21Matrix::get_rows() { return rows; }
-
-void S21Matrix::set_cols(int cols) {
-  if (cols > 0 && cols != this->cols) {
-    S21Matrix result(this->rows, cols);
-    for (int i = 0; i < this->rows; i++)
-      for (int j = 0; (j < cols) && (j < this->cols); j++)
-        result(i, j) = this->matrix[i][j];
-    *this = result;
-  }
-}
-
 int S21Matrix::get_cols() { return cols; }
 
 S21Matrix S21Matrix ::operator+(const S21Matrix &other) {

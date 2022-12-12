@@ -17,40 +17,37 @@ struct polygon_t {
 };
 
 struct data_t {
-  data_t() : count_of_vertex(0), count_of_polygons(0) {}
-  int count_of_vertex;
-  int count_of_polygons;
-  S21Matrix matrix;
-  polygon_t *polygons;
+      data_t() : count_of_vertex(0), count_of_polygons(0) {}
+      public:
+        int count_of_vertex;
+        int count_of_polygons;
+        S21Matrix matrix;
+        polygon_t *polygons;
 };
 
 class Model {
 
 public:
   Model() {};
-  Model(int rows, int cols);
   // Model(const Model &value);
 
   int is_digit(char expression);
 
   /* functions for parsing .obj */
 
-  bool count_vertexes_polygons(std::string &path_of_file);
-  bool create_matrix_obj(std::string &path_of_file);
-  bool note_vertexes_polygons(std::string &path_of_file);
+  bool count_vertexes_polygons(std::string &path_of_file, data_t &some_data);
+  bool create_matrix_obj(std::string &path_of_file, data_t &some_data);
+  bool note_vertexes_polygons(std::string &path_of_file, data_t &some_data);
 
-  int help_funk_vertexes_polygons(std::string &lineptr, int &count_polygon);
+  int help_funk_vertexes_polygons(std::string &lineptr, data_t &some_data, int &count_polygon);
 
   /* functions for transforming object */
-  void move_obj(double x, double y, double z);
-  void rotation_by_ox(double corner);
-  void rotation_by_oy(double corner);
-  void rotation_by_oz(double corner);
-  void scale_obj(double scale);
+  void move_obj(data_t &some_data, double x, double y, double z);
+  void rotation_by_ox(data_t &some_data, double corner);
+  void rotation_by_oy(data_t &some_data, double corner);
+  void rotation_by_oz(data_t &some_data, double corner);
+  void scale_obj(data_t &some_data, double scale);
   void get_max_min_frustum(double *max, double *min, data_t obj);
-
-  public:
-    data_t data;
 };
 
 } // namespace s21
