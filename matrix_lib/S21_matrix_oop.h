@@ -1,6 +1,7 @@
-#pragma once
-#include <math.h>
+#ifndef S21_MATRIX_OOP_H
+#define S21_MATRIX_OOP_H
 
+#include <math.h>
 #include <exception>
 #include <iostream>
 
@@ -37,12 +38,14 @@ public:
   int get_rows();
   void set_cols(int cols);
   int get_cols();
-
   void gen_mtx();
   void gen_mtx_rev();
+  void remove();
 
 private:
   int rows;
   int cols;
   double **matrix;
 };
+
+#endif  // S21_MATRIX_OOP_H

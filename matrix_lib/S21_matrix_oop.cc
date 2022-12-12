@@ -24,11 +24,11 @@ S21Matrix::S21Matrix(const S21Matrix &other) {
 }
 
 S21Matrix::S21Matrix(S21Matrix &&other) {
-  if (matrix != nullptr) {
+  // if (matrix) {
     for (int i = 0; i < rows; i++)
       delete[] matrix[i];
     delete[] matrix;
-  }
+  // }
   *this = other;
   other.matrix = nullptr;
   other.rows = other.cols = 0;
@@ -327,4 +327,10 @@ double &S21Matrix ::operator()(const int rows, const int cols) {
   if ((this->rows <= rows) || (this->cols <= cols))
     throw "index outside the matrix";
   return this->matrix[rows][cols];
+}
+
+void S21Matrix::remove() {
+  for (int i = 0; i < this->rows; i++)
+    for (int j = 0; j < this->cols; j++)
+      this->matrix[i][j] = 0;
 }
