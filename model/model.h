@@ -39,7 +39,7 @@ public:
   bool create_matrix_obj(std::string &path_of_file, data_t &some_data);
   bool note_vertexes_polygons(std::string &path_of_file, data_t &some_data);
 
-  int help_funk_vertexes_polygons(std::string &lineptr, data_t &some_data, int &count_polygon);
+  void help_funk_vertexes_polygons(std::string &lineptr, data_t &some_data, int &count_polygon);
 
   /* functions for transforming object */
   void move_obj(data_t &some_data, double x, double y, double z);

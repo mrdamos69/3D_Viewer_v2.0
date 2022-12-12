@@ -6,9 +6,8 @@
  */
 int s21::Model::is_digit(char expression) {
   int error = 1;
-  if ((expression >= '0' && expression <= '9') || expression == '.') {
+  if ((expression >= '0' && expression <= '9') || expression == '.')
     error = 0;
-  }
   return error;
 }
 
@@ -21,30 +20,28 @@ int s21::Model::is_digit(char expression) {
  * @param some_data куда записываем данные
  */
 bool s21::Model::count_vertexes_polygons(std::string &path_of_file, data_t &some_data) {
-  int error = 1;
   int cnt_vertexs = 0;
   int cnt_polygons = 0;
   some_data.count_of_vertex = 0;
   some_data.count_of_polygons = 0;
   some_data.polygons = NULL;
   std::ifstream file(path_of_file);
-  if (!file.eof()) {
+  if (!file.eof() && file.is_open()) {
     std::string lineptr;
-    // size_t n;
     while (std::getline(file, lineptr)) {
-      if (lineptr[0] == 'v' && lineptr[1] != 'n' && lineptr[1] != 't') {
+      if (lineptr[0] == 'v' && lineptr[1] != 'n' && lineptr[1] != 't')
         cnt_vertexs++;
-      } else if (lineptr[0] == 'f') {
+      else if (lineptr[0] == 'f')
         cnt_polygons++;
-      }
     }
   } else {
-    error = 0;
+    file.close();
+    return false;
   }
   file.close();
   some_data.count_of_vertex = cnt_vertexs;
   some_data.count_of_polygons = cnt_polygons;
-  return error;
+  return true;
 }
 
 /**
@@ -54,12 +51,10 @@ bool s21::Model::count_vertexes_polygons(std::string &path_of_file, data_t &some
  * @param some_data куда записываем данные
  */
 bool s21::Model::create_matrix_obj(std::string &path_of_file, data_t &some_data) {
-  int error = 1;
   std::ifstream file(path_of_file);
-  if (!file.eof()) {
+  if (!file.eof() && file.is_open()) {
     some_data.matrix.set_rows_cols(some_data.count_of_vertex, 3);
     std::string lineptr;
-    // size_t n;
     int rows = 0, columns = 0;
     while (std::getline(file, lineptr)) {
       if (lineptr[0] == 'v' && lineptr[1] != 'n' && lineptr[1] != 't') {
@@ -69,9 +64,8 @@ bool s21::Model::create_matrix_obj(std::string &path_of_file, data_t &some_data)
             char *start_number = &lineptr[index];
             if (lineptr[index] == '-')
               index++;
-            while (is_digit(lineptr[index]) == 0) {
+            while (is_digit(lineptr[index]) == 0)
               index++;
-            }
             char *finish_number = &lineptr[--index];
             double number = strtod(start_number, &finish_number);
             some_data.matrix(rows, columns) = number;
@@ -90,43 +84,40 @@ bool s21::Model::create_matrix_obj(std::string &path_of_file, data_t &some_data)
       }
     }
   } else {
-    error = 1;
+    file.close();
+    return false;
   }
   file.close();
-  return error;
+  return true;
 }
 
 bool s21::Model::note_vertexes_polygons(std::string &path_of_file, data_t &some_data) {
-  int error = 1;
   some_data.polygons = new s21::polygon_t[some_data.count_of_polygons + 1];
   std::ifstream file(path_of_file);
   int count = 0;
-  if (!file.eof()) {
+  if (!file.eof() && file.is_open()) {
     std::string lineptr;
-    // size_t n;
     while (getline(file, lineptr)) {
       if (lineptr[0] == 'f') {
         for (size_t i = 1; lineptr[i]; i++) {
-          if (lineptr[i] >= '0' && lineptr[i] <= '9') {
-            if (lineptr[i - 1] == ' ') {
+          if (lineptr[i] >= '0' && lineptr[i] <= '9')
+            if (lineptr[i - 1] == ' ')
               some_data.polygons[count].numbers_of_vertexes_in_facets++;
-            }
-          }
         }
         this->help_funk_vertexes_polygons(lineptr, some_data, count);
         count++;
       }
-    };
+    }
   } else {
-    error = 1;
+    file.close();
+    return false;
   }
   file.close();
-  return error;
+  return true;
 }
 
-int s21::Model::help_funk_vertexes_polygons(std::string &lineptr, data_t &some_data,
+void s21::Model::help_funk_vertexes_polygons(std::string &lineptr, data_t &some_data,
                                             int &count_polygon) {
-  int error = 0;
   int tmp_polygon;
   int j = 0;
   char* temp_date = lineptr.data();
@@ -155,7 +146,6 @@ int s21::Model::help_funk_vertexes_polygons(std::string &lineptr, data_t &some_d
       }
     }
   }
-  return error;
 }
 
 void s21::Model::move_obj(data_t &some_data, double x, double y, double z) {
@@ -227,12 +217,10 @@ void s21::Model::get_max_min_frustum(double *max, double *min, data_t obj) {
     double max_vertex = obj.matrix(0, 1);
     for (int i = 0; i < obj.count_of_vertex; i++) {
         for (int j = 0; j < 3; j++) {
-            if (min_vertex > obj.matrix(i, j)) {
+            if (min_vertex > obj.matrix(i, j))
                 min_vertex = obj.matrix(i, j);
-            }
-            if (max_vertex < obj.matrix(i, j)) {
+            if (max_vertex < obj.matrix(i, j))
                 max_vertex = obj.matrix(i, j);
-            }
         }
     }
     *max = max_vertex;
