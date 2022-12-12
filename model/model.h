@@ -17,11 +17,12 @@ struct polygon_t {
 };
 
 struct data_t {
-  data_t() : count_of_vertex(0), count_of_polygons(0) {}
-  int count_of_vertex;
-  int count_of_polygons;
-  S21Matrix matrix;
-  polygon_t *polygons;
+      data_t() : count_of_vertex(0), count_of_polygons(0) {}
+      public:
+        int count_of_vertex;
+        int count_of_polygons;
+        S21Matrix matrix;
+        polygon_t *polygons;
 };
 
 class Model {

@@ -41,6 +41,7 @@ public:
   void gen_mtx();
   void gen_mtx_rev();
   void remove();
+  void set_rows_cols(int rows, int cols);
 
 private:
   int rows;
