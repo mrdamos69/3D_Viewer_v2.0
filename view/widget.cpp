@@ -26,9 +26,6 @@ void Widget::resizeGL(int w, int h) {
     glViewport(0,0,w,h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
-//     int min = -484;
-//     int max =  338;
      double min = 0.0;
      double max = 0.0;
      controller.get_max_min_frustum(&max, &min, some_data);
@@ -37,33 +34,10 @@ void Widget::resizeGL(int w, int h) {
         } else if (max > qFabs(min)) {
             min = -max;
         }
-//     min*=1.2;
-//     max*=1.2;
-//     glOrtho(min,max,min,max,min,max);
-     /* задаем параметры */
       double coef = 1.2;
-//      min_x*=coef;
-//      max_x*=coef;
-//      min_y*=coef;
-//      max_y*=coef;
-//      min_z*=coef;
-//      max_z*=coef;
       max *=coef;
       min *=coef;
-     /* но для корректного отображения, обрати внимание, на функции в paintGL
-     */
      glOrtho(min,max,min,max,min,max);
-//              glOrtho(min, max, min, max, min_z, max_z+100);
-//              glOrtho(max_x, min_x, max_y, min_y, min_z, max_z);
-     //         glOrtho(min_x, max_x, min_y, max_y, min_z, max_z);
-
-     /* перспектива*/
-//     glTranslatef(0, 0, 10);
-//      double width = max_x - min_x;
-//      double height = max_y - min_y;
-
-//      gluPerspective(60.f, (GLfloat)(width/height), 1, 5000);
-//              glFrustum(min,max,min,max,min,max);
 
 }
 
@@ -71,9 +45,9 @@ void Widget::paintGL() {
        if(!path_to_file.isNull()){
        vertex = (double *)calloc(some_data.count_of_vertex*3, sizeof(double));
        facets = (unsigned int *)calloc(some_data.count_of_polygons*10, sizeof(unsigned int));
-       for (int i = 0, k = 0; i < some_data.matrix.rows; i++) {
-           for (int j = 0; j < some_data.matrix.columns; j++, k++) {
-               vertex[k] = some_data.matrix.matrix[i][j];
+       for (int i = 0, k = 0; i < some_data.matrix.get_rows(); i++) {
+           for (int j = 0; j < some_data.matrix.get_cols(); j++, k++) {
+               vertex[k] = some_data.matrix(i,j);
                if(k == 0)
                {
                min_x = vertex[k]; max_x = vertex[k];
@@ -100,7 +74,6 @@ void Widget::paintGL() {
         glLoadIdentity();
         glRotatef(xRot, 1.0, 0.0, 0.0);
         glRotatef(yRot, 0.0, 1.0, 0.0);
-//        if(change_geometry) glTranslatef(0,min_y,min_z);
         if (line_type) {
             glLineStipple(1, 0x00F0);
             glEnable(GL_LINE_STIPPLE);
@@ -144,10 +117,10 @@ void Widget::mouseMoveEvent(QMouseEvent* mo){
     update();
 }
 
-int Widget::validation_of_files(char* name_file) {
-    if(controller.count_vertexes_polygons(name_file, &some_data) && !path_to_file.isNull()) { errors(3); return 1; }
-    if(controller.create_matrix_obj(name_file, &some_data) && !path_to_file.isNull()) { errors(4); return 1; }
-    if(controller.note_vertexes_polygons(name_file, &some_data) && !path_to_file.isNull()) { errors(5); return 1; }
+int Widget::validation_of_files(std::string &name_file) {
+    if(controller.count_vertexes_polygons(name_file, some_data) && !path_to_file.isNull()) { errors(3); return 1; }
+    if(controller.create_matrix_obj(name_file, some_data) && !path_to_file.isNull()) { errors(4); return 1; }
+    if(controller.note_vertexes_polygons(name_file, some_data) && !path_to_file.isNull()) { errors(5); return 1; }
     return 0;
 }
 
@@ -178,9 +151,9 @@ void Widget:: parcing_3d_files()
 {
     path_to_file = QFileDialog::getOpenFileName(NULL, "Open", "/Users/", "*.obj");
     QByteArray tmp = path_to_file.toLocal8Bit();
-    char* name_of_file = tmp.data();
+    std::string name_of_file = tmp.data();
 
-    if (!name_of_file) { errors(2); path_to_file = NULL; return; }
+    if (name_of_file.empty()) { errors(2); path_to_file = NULL; return; }
     if  (validation_of_files(name_of_file)) { path_to_file = NULL; return;}
 
 }
@@ -205,21 +178,21 @@ void Widget:: check_vertex_min_max(double check, int choise) {
 
 void Widget::for_move(double x, double y, double z)
 {
-    move_obj(&some_data, x, y, z);
+    controller.move_obj(some_data, x, y, z);
     update();
 }
 
 void Widget::for_rot(double x, double y, double z)
 {
-    rotation_by_ox(&some_data, x);
-    rotation_by_oy(&some_data, y);
-    rotation_by_oz(&some_data, z);
+    controller.rotation_by_ox(some_data, x);
+    controller.rotation_by_oy(some_data, y);
+    controller.rotation_by_oz(some_data, z);
     update();
 }
 
 void Widget::for_scale(double x)
 {
-    scale_obj(&some_data, x);
+    controller.scale_obj(some_data, x);
     update();
 }
 

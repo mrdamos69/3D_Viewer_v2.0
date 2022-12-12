@@ -64,7 +64,7 @@ private:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
-    int validation_of_files(char* name_file);
+    int validation_of_files(std::string &name_file);
     void parcing_3d_files();
     void check_vertex_min_max(double check, int choise);
     void open_file();

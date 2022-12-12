@@ -136,15 +136,15 @@ void view::on_stipple_off_clicked()
     }
 }
 
-//void MainWindow::on_vertextype_round_clicked()
-//{
-//   if (ui->download_obj->isCheckable()) {
-//    p_test->type_point = 2;
-//    p_test->change_vertex_type(p_test->type_point);
-//    p_test->update();
-//    create_screen();
-//    }
-//}
+void view::on_vertextype_round_clicked()
+{
+   if (ui->download_obj->isCheckable()) {
+    p_test->type_point = 2;
+    p_test->change_vertex_type(p_test->type_point);
+    p_test->update();
+    create_screen();
+    }
+}
 
 void view::on_vertextype_square_clicked()
 {
@@ -184,8 +184,8 @@ void view::on_start_image_clicked()
     flag = 1;
 }
 
-//void view::on_stop_image_clicked()
-//{
+void view::on_stop_image_clicked()
+{
 //        flag = 0;
 //            QString fileName = QFileDialog::getSaveFileName(this, tr("Save screenshot"), "", tr("GIF screenshot (*.gif);;GIF screenshot (*.gif)"));
 //            QGifImage gif(QSize(640, 480));
@@ -207,7 +207,7 @@ void view::on_start_image_clicked()
 //                gif.addFrame(*img);
 //            }
 //            gif.save(fileName);
-//}
+}
 
 void view::information_of_file() {
    if (ui->download_obj->isCheckable()) {
