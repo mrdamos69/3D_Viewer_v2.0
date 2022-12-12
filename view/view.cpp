@@ -23,6 +23,7 @@ void view::on_download_obj_clicked()
     {ui->download_obj->setCheckable(true);
     information_of_file();}
     else {p_test->errors(1);ui->download_obj->setCheckable(false);}
+
 }
 
 void view::on_change_move_clicked()
