@@ -13,17 +13,17 @@ view::~view()
     delete ui;
 }
 
-//void view::on_download_obj_clicked()
-//{
-//    p_test = new Widget(this);
-//    p_test->show();
-//    create_screen();
+void view::on_download_obj_clicked()
+{
+    p_test = new Widget(this);
+    p_test->show();
+    create_screen();
 
-//    if(!p_test->path_to_file.isNull())
-//    {ui->download_obj->setCheckable(true); information_of_file();}
-//    else {p_test->errors(1);ui->download_obj->setCheckable(false);}
+    if(!p_test->path_to_file.isNull())
+    {ui->download_obj->setCheckable(true); information_of_file();}
+    else {p_test->errors(1);ui->download_obj->setCheckable(false);}
 
-//}
+}
 
 //void view::on_change_move_clicked()
 //{
