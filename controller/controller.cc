@@ -16,10 +16,6 @@ bool s21::Controller::note_vertexes_polygons(std::string &path_of_file, data_t &
     return model.note_vertexes_polygons(path_of_file, some_data);
 }
 
-int s21::Controller::help_funk_vertexes_polygons(std::string &lineptr, data_t &some_data, int &count_polygon) {
-    return model.help_funk_vertexes_polygons(lineptr, some_data, count_polygon);
-}
-
 void s21::Controller::move_obj(data_t &some_data, double x, double y, double z) {
     return model.move_obj(some_data, x, y, z);
 }
