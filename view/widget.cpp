@@ -118,9 +118,9 @@ void Widget::mouseMoveEvent(QMouseEvent* mo){
 }
 
 int Widget::validation_of_files(std::string &name_file) {
-    if(controller.count_vertexes_polygons(name_file, some_data) && !path_to_file.isNull()) { errors(3); return 1; }
-    if(controller.create_matrix_obj(name_file, some_data) && !path_to_file.isNull()) { errors(4); return 1; }
-    if(controller.note_vertexes_polygons(name_file, some_data) && !path_to_file.isNull()) { errors(5); return 1; }
+    if(!controller.count_vertexes_polygons(name_file, some_data) && !path_to_file.isNull()) { errors(3); return 1; }
+    if(!controller.create_matrix_obj(name_file, some_data) && !path_to_file.isNull()) { errors(4); return 1; }
+    if(!controller.note_vertexes_polygons(name_file, some_data) && !path_to_file.isNull()) { errors(5); return 1; }
     return 0;
 }
 
