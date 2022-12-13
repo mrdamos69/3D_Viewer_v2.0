@@ -9,7 +9,7 @@
 #include <QTimer>
 #include <QMouseEvent>
 #include "../controller/controller.h"
-#include <glu.h>
+#include <GL/glu.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
