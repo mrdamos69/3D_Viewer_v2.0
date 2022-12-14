@@ -9,7 +9,7 @@
 #include <QPixmap>
 #include <QSize>
 #include <QVector>
-
+#include "../QtGifImage-master/src/gifimage/qgifimage.h"
 #include "widget.h"
 
 QT_BEGIN_NAMESPACE

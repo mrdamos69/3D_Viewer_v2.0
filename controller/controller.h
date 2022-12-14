@@ -2,12 +2,13 @@
 #define CONTROLLER_H
 
 #include "../model/model.h"
+#include "../model/struct/struct.h"
 
 namespace s21 {
 
 class Controller {
  private:
-   s21::Model model;
+   Model model;
     static Controller* controller_;
     Controller() { model.get_model(); }
     ~Controller() { delete controller_; }

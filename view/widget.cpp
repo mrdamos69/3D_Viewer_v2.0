@@ -40,9 +40,9 @@ void Widget::resizeGL(int w, int h) {
 
 void Widget::paintGL() {
   if (!path_to_file.isNull()) {
-    vertex = (double *)calloc(some_data.count_of_vertex * 3, sizeof(double));
-    facets = (unsigned int *)calloc(some_data.count_of_polygons * 10,
-                                    sizeof(unsigned int));
+     vertex = (double *)calloc(some_data.count_of_vertex * 3, sizeof(double));
+     facets = (unsigned int *)calloc(some_data.count_of_polygons * 10,
+                                     sizeof(unsigned int));
     for (int i = 0, k = 0; i < some_data.matrix.get_rows(); i++) {
       for (int j = 0; j < some_data.matrix.get_cols(); j++, k++) {
         vertex[k] = some_data.matrix(i, j);

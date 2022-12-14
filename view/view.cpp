@@ -99,28 +99,27 @@ void view::create_screen() {
 void view::on_start_image_clicked() { flag = 1; }
 
 void view::on_stop_image_clicked() {
-  //        flag = 0;
-  //            QString fileName = QFileDialog::getSaveFileName(this, tr("Save
-  //            screenshot"), "", tr("GIF screenshot (*.gif);;GIF screenshot
-  //            (*.gif)")); QGifImage gif(QSize(640, 480)); QVector<QRgb>
-  //            ctable; ctable << qRgb(255, 255, 255)
-  //                   << qRgb(0, 0, 0)
-  //                   << qRgb(255, 0, 0)
-  //                   << qRgb(0, 255, 0)
-  //                   << qRgb(0, 0, 255)
-  //                   << qRgb(255, 255, 0)
-  //                   << qRgb(0, 255, 255)
-  //                   << qRgb(255, 0, 255);
+          flag = 0;
+              QString fileName = QFileDialog::getSaveFileName(this, tr("Save screenshot"), "", tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
+              QGifImage gif(QSize(640, 480)); QVector<QRgb>
+              ctable; ctable << qRgb(255, 255, 255)
+                     << qRgb(0, 0, 0)
+                     << qRgb(255, 0, 0)
+                     << qRgb(0, 255, 0)
+                     << qRgb(0, 0, 255)
+                     << qRgb(255, 255, 0)
+                     << qRgb(0, 255, 255)
+                     << qRgb(255, 0, 255);
 
-  //            gif.setGlobalColorTable(ctable, Qt::black);
-  //            gif.setDefaultTransparentColor(Qt::black);
-  //            gif.setDefaultDelay(100);
+              gif.setGlobalColorTable(ctable, Qt::black);
+              gif.setDefaultTransparentColor(Qt::black);
+              gif.setDefaultDelay(100);
 
-  //            for (QVector<QImage>::Iterator img = mas_image.begin(); img !=
-  //            mas_image.end(); ++img) {
-  //                gif.addFrame(*img);
-  //            }
-  //            gif.save(fileName);
+              for (QVector<QImage>::Iterator img = mas_image.begin(); img !=
+              mas_image.end(); ++img) {
+                  gif.addFrame(*img);
+              }
+              gif.save(fileName);
 }
 
 void view::information_of_file() {

@@ -7,16 +7,20 @@
 namespace s21 {
 
 class Model {
- private:
-  s21::Parser parser;
-  s21::Transform transform;
-  static Model *model;
+private:
+    Parser parser;
+    Transform transform;
+    static Model* model_;
+
 public:
-  Model(){}
-  ~Model() {delete model;}
-   static Model* get_model() {
-        if (!model) model = new Model();
-        return model;
+    Model() {
+        parser.get_parser();
+        transform.get_transform();
+    }
+    ~Model() { delete model_; }
+    static Model* get_model() {
+        if (!model_) model_ = new Model();
+        return model_;
     }
   /* functions for parsing .obj */
   bool is_digit(char expression);
@@ -26,7 +30,6 @@ public:
 
   void help_funk_vertexes_polygons(std::string &lineptr, data_t &some_data,
                                    int &count_polygon);
-
   /* functions for transforming object */
   void move_obj(data_t &some_data, double x, double y, double z);
   void rotation_by_ox(data_t &some_data, double corner);
