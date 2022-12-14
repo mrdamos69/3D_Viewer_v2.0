@@ -6,10 +6,10 @@
 namespace s21 {
 
 class Controller {
-private:
+ private:
   s21::Model model;
 
-public:
+ public:
   int is_digit(char expression);
   bool count_vertexes_polygons(std::string &path_of_file, data_t &some_data);
   bool create_matrix_obj(std::string &path_of_file, data_t &some_data);
@@ -22,6 +22,6 @@ public:
   void get_max_min_frustum(double *max, double *min, data_t obj);
 };
 
-} //  namespace s21
+}  //  namespace s21
 
 #endif

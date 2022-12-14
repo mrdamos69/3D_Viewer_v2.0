@@ -1,70 +1,92 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include <QMainWindow>
-#include "widget.h"
+#include <QColorDialog>
 #include <QFileDialog>
-#include <QVector>
 #include <QImage>
+#include <QMainWindow>
 #include <QPainter>
 #include <QPixmap>
 #include <QSize>
+#include <QVector>
+
+#include "widget.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class view; }
+namespace Ui {
+class view;
+}
 QT_END_NAMESPACE
 
-class view : public QMainWindow
-{
-    Q_OBJECT
+class view : public QMainWindow {
+  Q_OBJECT
 
-public:
-    view(QWidget *parent = nullptr);
-    ~view();
-    int flag = 0;
-    Widget *p_test;
-    QVector<QImage> mas_image;
+ public:
+  view(QWidget *parent = nullptr);
+  ~view();
+  int flag = 0;
+  double scale;
+  Widget *p_test;
+  QVector<QImage> mas_image;
+  QVector<double> rot{0, 0, 0};
+  QVector<double> move{0, 0, 0};
 
-private slots:
-    void on_download_obj_clicked();
+ private slots:
+  void on_download_obj_clicked();
 
-    void on_change_move_clicked();
+  void on_background_white_clicked();
 
-    void on_change_rot_clicked();
+  void on_change_vertex_color_clicked();
 
-    void on_change_scale_clicked();
+  void on_change_edge_color_clicked();
 
-    void on_background_white_clicked();
+  void on_screenshot_clicked();
 
-    void on_change_vertex_color_clicked();
+  void create_screen();
 
-    void on_change_vertex_size_clicked();
+  void on_start_image_clicked();
 
-    void on_change_edge_color_clicked();
+  void on_stop_image_clicked();
 
-    void on_change_edge_size_clicked();
+  void information_of_file();
 
-    void on_stipple_on_clicked();
+  void on_cBox_vertex_type_activated(int index);
 
-    void on_stipple_off_clicked();
+  void on_sBox_vertex_size_valueChanged(int arg1);
 
-    void on_vertextype_round_clicked();
+  void on_sBox_line_size_valueChanged(int arg1);
 
-    void on_vertextype_square_clicked();
+  void on_change_zoom_clicked();
 
-    void on_vertextype_none_clicked();
+  void on_change_zoom_2_clicked();
 
-    void on_screenshot_clicked();
+  void on_cBox_line_type_activated(int index);
 
-    void create_screen();
+  void on_change_rot_x_pressed();
 
-    void on_start_image_clicked();
+  void on_change_rot_x2_pressed();
 
-    void on_stop_image_clicked();
+  void on_change_rot_y_pressed();
 
-    void information_of_file();
+  void on_change_rot_y2_pressed();
 
-private:
-    Ui::view *ui;
+  void on_change_rot_z_pressed();
+
+  void on_change_rot_z2_pressed();
+
+  void on_change_move_x_pressed();
+
+  void on_change_move_x2_pressed();
+
+  void on_change_move_y_pressed();
+
+  void on_change_move_y2_pressed();
+
+  void on_change_move_z_pressed();
+
+  void on_change_move_z2_pressed();
+
+ private:
+  Ui::view *ui;
 };
-#endif // VIEW_H
+#endif  // VIEW_H
