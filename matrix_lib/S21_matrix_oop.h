@@ -2,11 +2,12 @@
 #define S21_MATRIX_OOP_H
 
 #include <math.h>
+
 #include <exception>
 #include <iostream>
 
 class S21Matrix {
-public:
+ public:
   S21Matrix();
   S21Matrix(int rows, int cols);
   S21Matrix(const S21Matrix &other);
@@ -43,7 +44,7 @@ public:
   void remove();
   void set_rows_cols(int rows, int cols);
 
-private:
+ private:
   int rows;
   int cols;
   double **matrix;
