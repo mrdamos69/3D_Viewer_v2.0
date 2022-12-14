@@ -10,16 +10,11 @@
 #include "../struct/struct.h"
 namespace s21 {
 class Transform {
- private:
-  static Transform *parser;
+ public:
   Transform();
-  ~Transform() { delete parser; }
+  ~Transform() {}
 
  public:
-  static Transform *get_parser() {
-    if (!parser) parser = new Transform();
-    return parser;
-  }
   void move_obj(data_t &some_data, double x, double y, double z);
   void rotation_by_ox(data_t &some_data, double corner);
   void rotation_by_oy(data_t &some_data, double corner);

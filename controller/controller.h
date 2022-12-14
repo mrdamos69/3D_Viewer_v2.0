@@ -7,9 +7,9 @@ namespace s21 {
 
 class Controller {
  private:
-   Model* model;
+   s21::Model model;
     static Controller* controller_;
-    Controller() { model = model->get_model(); }
+    Controller() { model.get_model(); }
     ~Controller() { delete controller_; }
 
  public:

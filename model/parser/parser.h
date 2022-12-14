@@ -10,16 +10,11 @@
 #include "../struct/struct.h"
 namespace s21 {
 class Parser {
- private:
-  static Parser *parser;
+ public:
   Parser();
-  ~Parser() { delete parser; }
+  ~Parser() {};
 
  public:
-  static Parser *get_parser() {
-    if (!parser) parser = new Parser();
-    return parser;
-  }
   bool is_digit(char expression);
   bool count_vertexes_polygons(std::string &path_of_file, data_t &some_data);
   bool parsing_vertexes_and_polygons(std::string &path_of_file,

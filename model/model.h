@@ -8,19 +8,16 @@ namespace s21 {
 
 class Model {
  private:
-  s21::Parser *parser;
-  s21::Transform *transform;
+  s21::Parser parser;
+  s21::Transform transform;
   static Model *model;
-  Model(){
-    parser = parser->get_parser();
-    transform = transform->get_parser();
-  };
-  ~Model() {delete model;}
 public:
+  Model(){}
+  ~Model() {delete model;}
    static Model* get_model() {
         if (!model) model = new Model();
         return model;
-    } 
+    }
   /* functions for parsing .obj */
   bool is_digit(char expression);
   bool count_vertexes_polygons(std::string &path_of_file, data_t &some_data);
