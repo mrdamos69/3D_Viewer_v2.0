@@ -26,7 +26,7 @@ void Widget::resizeGL(int w, int h) {
   glLoadIdentity();
   double min = 0.0;
   double max = 0.0;
-  controller.get_max_min_frustum(&max, &min, some_data);
+  controller->get_max_min_frustum(&max, &min, some_data);
   if (qFabs(min) > max) {
     max = qFabs(min);
   } else if (max > qFabs(min)) {
@@ -143,17 +143,17 @@ void Widget::mouseMoveEvent(QMouseEvent *mo) {
 }
 
 int Widget::validation_of_files(std::string &name_file) {
-  if (!controller.count_vertexes_polygons(name_file, some_data) &&
+  if (!controller->count_vertexes_polygons(name_file, some_data) &&
       !path_to_file.isNull()) {
     errors(3);
     return 1;
   }
-  if (!controller.create_matrix_obj(name_file, some_data) &&
+  if (!controller->create_matrix_obj(name_file, some_data) &&
       !path_to_file.isNull()) {
     errors(4);
     return 1;
   }
-  if (!controller.note_vertexes_polygons(name_file, some_data) &&
+  if (!controller->note_vertexes_polygons(name_file, some_data) &&
       !path_to_file.isNull()) {
     errors(5);
     return 1;
@@ -218,19 +218,19 @@ void Widget::check_vertex_min_max(double check, int choise) {
 }
 
 void Widget::for_move(double x, double y, double z) {
-  controller.move_obj(some_data, x, y, z);
+  controller->move_obj(some_data, x, y, z);
   update();
 }
 
 void Widget::for_rot(double x, double y, double z) {
-  controller.rotation_by_ox(some_data, x);
-  controller.rotation_by_oy(some_data, y);
-  controller.rotation_by_oz(some_data, z);
+  controller->rotation_by_ox(some_data, x);
+  controller->rotation_by_oy(some_data, y);
+  controller->rotation_by_oz(some_data, z);
   update();
 }
 
 void Widget::for_scale(double x) {
-  controller.scale_obj(some_data, x);
+  controller->scale_obj(some_data, x);
   update();
 }
 

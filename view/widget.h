@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <GL/glu.h>
+#include <glu.h>
 #include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>
@@ -12,6 +12,7 @@
 #include <QWidget>
 
 #include "../controller/controller.h"
+#include "../model/struct/struct.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -62,7 +63,7 @@ class Widget : public QOpenGLWidget {
 
  private:
   Ui::Widget *ui;
-  s21::Controller controller;
+  s21::Controller *controller = nullptr;
   void initializeGL() override;
   void resizeGL(int w, int h) override;
   void paintGL() override;

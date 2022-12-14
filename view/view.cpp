@@ -30,7 +30,6 @@ void view::on_background_white_clicked() {
     p_test->change_background_color(col.selectedColor().redF(),
                                     col.selectedColor().greenF(),
                                     col.selectedColor().blueF());
-
     p_test->update();
     create_screen();
   }

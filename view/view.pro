@@ -12,6 +12,8 @@ SOURCES += \
     ../controller/controller.cc \
     ../matrix_lib/S21_matrix_oop.cc \
     ../model/model.cc \
+    ../model/parser/parser.cc \
+    ../model/transform/transform.cc \
     main.cpp \
     view.cpp \
     widget.cpp
@@ -20,6 +22,9 @@ HEADERS += \
     ../controller/controller.h \
     ../matrix_lib/S21_matrix_oop.h \
     ../model/model.h \
+    ../model/parser/parser.h \
+    ../model/struct/struct.h \
+    ../model/transform/transform.h \
     view.h \
     widget.h
 
