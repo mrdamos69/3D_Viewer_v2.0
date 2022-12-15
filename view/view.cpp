@@ -95,11 +95,13 @@ void view::on_cBox_vertex_type_activated(int index) {
 }
 
 void view::on_screenshot_clicked() {
-  QFileDialog image(this);
-  QString file_name = image.getSaveFileName(this, tr("Save a screenshot"), "",
-                                            tr("image (*.jpeg *.bmp)"));
-  QImage img = p_test->grabFramebuffer();
-  img.save(file_name);
+  if (ui->download_obj->isCheckable()) {
+    QFileDialog image(this);
+    QString file_name = image.getSaveFileName(this, tr("Save a screenshot"), "",
+                                              tr("image (*.jpeg *.bmp)"));
+    QImage img = p_test->grabFramebuffer();
+    img.save(file_name);
+  }
 }
 
 void view::create_screen() {
@@ -111,17 +113,19 @@ void view::create_screen() {
 void view::on_start_image_clicked() { flag = 1; }
 
 void view::on_stop_image_clicked() {
-  flag = 0;
-  QString fileName = QFileDialog::getSaveFileName(
-      this, tr("Save screenshot"), "",
-      tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
-  QGifImage gif;
-  QImage img = p_test->grabFramebuffer();
-  for (QVector<QImage>::Iterator img = mas_image.begin();
-       img != mas_image.end(); ++img) {
-    gif.addFrame(*img);
+  if (ui->download_obj->isCheckable()) {
+    flag = 0;
+    QString fileName = QFileDialog::getSaveFileName(
+        this, tr("Save screenshot"), "",
+        tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
+    QGifImage gif;
+    QImage img = p_test->grabFramebuffer();
+    for (QVector<QImage>::Iterator img = mas_image.begin();
+         img != mas_image.end(); ++img) {
+      gif.addFrame(*img);
+    }
+    gif.save(fileName);
   }
-  gif.save(fileName);
 }
 
 void view::information_of_file() {
