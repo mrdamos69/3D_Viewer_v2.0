@@ -90,42 +90,30 @@ void view::on_cBox_vertex_type_activated(int index) {
 }
 
 void view::on_screenshot_clicked() {
-  QString file = QFileDialog::getSaveFileName(this, "Save as...", "name",
-                                              "BMP (*.bmp);; JPEG (*.jpeg)");
-  p_test->grab().save(file);
+    QFileDialog image(this);
+        QString file_name = image.getSaveFileName(this, tr("Save a screenshot"), "", tr("image (*.jpeg *.bmp)"));
+        QImage img = p_test->grabFramebuffer();
+        img.save(file_name);
 }
 
 void view::create_screen() {
-  if (flag == 1) {
-    mas_image.push_back(p_test->grab().toImage());
-  }
+    if (flag == 1) {
+      mas_image.push_back(p_test->grab().toImage());
+    }
 }
 
 void view::on_start_image_clicked() { flag = 1; }
 
 void view::on_stop_image_clicked() {
-  // flag = 0;
-  // QString fileName = QFileDialog::getSaveFileName(this, tr("Save
-  // screenshot"), "", tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
-  // QGifImage gif(QSize(640, 480)); QVector<QRgb>
-  // ctable; ctable << qRgb(255, 255, 255)
-  //       << qRgb(0, 0, 0)
-  //       << qRgb(255, 0, 0)
-  //       << qRgb(0, 255, 0)
-  //       << qRgb(0, 0, 255)
-  //       << qRgb(255, 255, 0)
-  //       << qRgb(0, 255, 255)
-  //       << qRgb(255, 0, 255);
-
-  // gif.setGlobalColorTable(ctable, Qt::black);
-  // gif.setDefaultTransparentColor(Qt::black);
-  // gif.setDefaultDelay(100);
-
-  // for (QVector<QImage>::Iterator img = mas_image.begin(); img !=
-  // mas_image.end(); ++img) {
-  //     gif.addFrame(*img);
-  // }
-  // gif.save(fileName);
+   flag = 0;
+   QString fileName = QFileDialog::getSaveFileName(this, tr("Save screenshot"), "", tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
+   QGifImage gif;
+   QImage img = p_test->grabFramebuffer();
+                for (QVector<QImage>::Iterator img = mas_image.begin(); img !=
+                mas_image.end(); ++img) {
+                    gif.addFrame(*img);
+                }
+                gif.save(fileName);
 }
 
 void view::information_of_file() {
