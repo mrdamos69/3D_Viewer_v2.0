@@ -29,8 +29,11 @@ class view : public QMainWindow {
   double scale;
   Widget *p_test;
   QVector<QImage> mas_image;
-  QVector<double> rot{0, 0, 0};
-  QVector<double> move{0, 0, 0};
+
+  QVector<double> coordinates{0, 0, 0, 0, 0, 0, 0};
+
+//  QVector<double> rot{0, 0, 0};
+//  QVector<double> move{0, 0, 0};
 
  private slots:
   void on_download_obj_clicked();
@@ -89,5 +92,13 @@ class view : public QMainWindow {
 
  private:
   Ui::view *ui;
+
+ signals:
+  void signal_zoom(double);
+  void signal_rot_move(QVector<double>);
+
+//  void signal_zoom(QVector<double>);
+//  void signal_zoom(QVector<double>);
+
 };
 #endif  // VIEW_H

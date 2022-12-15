@@ -49,16 +49,20 @@ class Widget : public QOpenGLWidget {
   void parcing_3d_files();
 
  public slots:
-  void for_move(double x, double y, double z);
-  void for_rot(double x, double y, double z);
-  void for_scale(double x);
+//  void for_move(double x, double y, double z);
+//  void for_rot(double x, double y, double z);
+  void slot_zoom(double x);
+  void slot_rot_move(QVector<double> rmz);
+
   void change_background_color(double x, double y, double z);
   void change_vertex_color(double x, double y, double z);
-  void change_vertex_size(double x);
   void change_edge_color(double x, double y, double z);
+
+  void change_vertex_size(double x);
   void change_edge_size(double x);
   void change_line_type(double x);
   void change_vertex_type(double x);
+
   void errors(int error);
   void change_geo();
 

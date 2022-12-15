@@ -236,23 +236,33 @@ void Widget::check_vertex_min_max(double check, int choise) {
   }
 }
 
-void Widget::for_move(double x, double y, double z) {
-  if (!path_to_file.isNull()) {
-    controller->move_obj(some_data, x, y, z);
-    update();
-  }
+void Widget::slot_rot_move(QVector<double> rmz) {
+    if (!path_to_file.isNull()) {
+        controller->rotation_by_ox(some_data, rmz[0]);
+        controller->rotation_by_oy(some_data, rmz[1]);
+        controller->rotation_by_oz(some_data, rmz[2]);
+        controller->move_obj(some_data, rmz[3], rmz[4], rmz[5]);
+        update();
+    }
 }
 
-void Widget::for_rot(double x, double y, double z) {
-  if (!path_to_file.isNull()) {
-    controller->rotation_by_ox(some_data, x);
-    controller->rotation_by_oy(some_data, y);
-    controller->rotation_by_oz(some_data, z);
-    update();
-  }
-}
+//void Widget::for_move(double x, double y, double z) {
+//  if (!path_to_file.isNull()) {
+//    controller->move_obj(some_data, x, y, z);
+//    update();
+//  }
+//}
 
-void Widget::for_scale(double x) {
+//void Widget::for_rot(double x, double y, double z) {
+//  if (!path_to_file.isNull()) {
+//    controller->rotation_by_ox(some_data, x);
+//    controller->rotation_by_oy(some_data, y);
+//    controller->rotation_by_oz(some_data, z);
+//    update();
+//  }
+//}
+
+void Widget::slot_zoom(double x) {
   controller->scale_obj(some_data, x);
   update();
 }

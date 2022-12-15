@@ -10,6 +10,9 @@ view::~view() { delete ui; }
 
 void view::on_download_obj_clicked() {
   p_test = new Widget(this);
+  connect(this, &view::signal_zoom, p_test, &Widget::slot_zoom);
+  connect(this, &view::signal_rot_move, p_test, &Widget::slot_rot_move);
+
   p_test->show();
   create_screen();
   if (!p_test->path_to_file.isNull()) {
@@ -153,22 +156,6 @@ void view::on_sBox_line_size_valueChanged(int arg1) {
   }
 }
 
-void view::on_change_zoom_clicked() {
-  if (ui->download_obj->isCheckable()) {
-    p_test->for_scale(scale + ui->dSpinBox_zoom->value());
-    p_test->update();
-    create_screen();
-  }
-}
-
-void view::on_change_zoom_2_clicked() {
-  if (ui->download_obj->isCheckable()) {
-    p_test->for_scale(scale + (ui->dSpinBox_zoom->value() * (-1)));
-    p_test->update();
-    create_screen();
-  }
-}
-
 void view::on_cBox_line_type_activated(int index) {
   if (ui->download_obj->isCheckable()) {
     p_test->line_type = index;
@@ -178,110 +165,112 @@ void view::on_cBox_line_type_activated(int index) {
   }
 }
 
+void view::on_change_zoom_clicked() {
+  if (ui->download_obj->isCheckable()) {
+    emit signal_zoom(scale + ui->dSpinBox_zoom->value());
+    create_screen();
+  }
+}
+
+void view::on_change_zoom_2_clicked() {
+  if (ui->download_obj->isCheckable()) {
+      emit signal_zoom(scale + (-ui->dSpinBox_zoom->value()));
+      create_screen();
+  }
+}
+
 void view::on_change_rot_x_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[0] = M_PI / 180.0 * ui->dSpinBox_rot->value();
-    p_test->for_rot(rot[0], rot[1], rot[2]);
-    p_test->update();
+    this->coordinates[0] = M_PI / 180.0 * ui->dSpinBox_rot->value();
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_rot_x2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[0] = M_PI / 180.0 * (-ui->dSpinBox_rot->value());
-    p_test->for_rot(rot[0], rot[1], rot[2]);
-    p_test->update();
+    this->coordinates[0] = M_PI / 180.0 * (- ui->dSpinBox_rot->value());
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_rot_y_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[1] = M_PI / 180.0 * ui->dSpinBox_rot_2->value();
-    p_test->for_rot(rot[0], rot[1], rot[2]);
-    p_test->update();
+    this->coordinates[1] = M_PI / 180.0 * ui->dSpinBox_rot_2->value();
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_rot_y2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[1] = M_PI / 180.0 * (-ui->dSpinBox_rot_2->value());
-    p_test->for_rot(rot[0], rot[1], rot[2]);
-    p_test->update();
+    this->coordinates[1] = M_PI / 180.0 * (- ui->dSpinBox_rot_2->value());
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_rot_z_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[2] = M_PI / 180.0 * ui->dSpinBox_rot_3->value();
-    p_test->for_rot(rot[0], rot[1], rot[2]);
-    p_test->update();
+    this->coordinates[2] = M_PI / 180.0 * ui->dSpinBox_rot_3->value();
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_rot_z2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[2] = M_PI / 180.0 * (-ui->dSpinBox_rot_3->value() * (-1));
-    p_test->for_rot(rot[0], rot[1], rot[2]);
-    p_test->update();
+    this->coordinates[2] = M_PI / 180.0 * (- ui->dSpinBox_rot_3->value());
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_move_x_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[0] = ui->dSpinBox_move->value();
-    p_test->for_move(move[0], 0, 0);
-    p_test->update();
+    this->coordinates[3] = ui->dSpinBox_move->value();
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_move_x2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[0] = (-ui->dSpinBox_move->value());
-    p_test->for_move(move[0], 0, 0);
-    p_test->update();
+    this->coordinates[3] = (- ui->dSpinBox_move->value());
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_move_y_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[1] = ui->dSpinBox_move_2->value();
-    p_test->for_move(0, move[1], 0);
-    p_test->update();
+    this->coordinates[4] = ui->dSpinBox_move_2->value();
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_move_y2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[1] = (-ui->dSpinBox_move_2->value());
-    p_test->for_move(0, move[1], 0);
-    p_test->update();
+    this->coordinates[4] = (- ui->dSpinBox_move_2->value());
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_move_z_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[2] = ui->dSpinBox_move_3->value();
-    p_test->for_move(0, 0, move[2]);
-    p_test->update();
+    this->coordinates[4] = ui->dSpinBox_move_3->value();
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
 
 void view::on_change_move_z2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[2] = (-ui->dSpinBox_move_3->value());
-    p_test->for_move(0, 0, move[2]);
-    p_test->update();
+    this->coordinates[4] = (- ui->dSpinBox_move_3->value());
+    emit signal_rot_move(this->coordinates);
     create_screen();
   }
 }
