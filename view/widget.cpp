@@ -10,7 +10,9 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent), ui(new Ui::Widget) {
   setWindowTitle("the visualaze_3d_object");
   setGeometry(10, 10, 1150, 870);
   this->parcing_3d_files();
-  settings = new QSettings(QCoreApplication::applicationDirPath() + "/setting.ini", QSettings::IniFormat);
+  settings =
+      new QSettings(QCoreApplication::applicationDirPath() + "/setting.ini",
+                    QSettings::IniFormat);
   loadSettings();
 }
 
@@ -52,27 +54,27 @@ void Widget::paintGL() {
     facets = new unsigned int[some_data.count_of_polygons * 10];
     this->print_vertex();
     this->print_poligons();
-    glClearColor(r1, g1, b1, 0);
+    glClearColor(color[3], color[4], color[5], 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glRotatef(xRot, 1.0, 0.0, 0.0);
     glRotatef(yRot, 0.0, 1.0, 0.0);
-    this->set_line_type(line_type);
+    this->set_line_type(set_vertex_line[2]);
     this->draw_vertex();
     glVertexPointer(3, GL_DOUBLE, 0, vertex);
     glEnableClientState(GL_VERTEX_ARRAY);
     glDrawArrays(GL_POINTS, 0, some_data.count_of_vertex);
-    glLineWidth(width_edge);
-    glColor4f(r, g, b, 1);
+    glLineWidth(set_vertex_line[3]);
+    glColor4f(color[0], color[1], color[2], 1);
     glDrawElements(GL_POINTS, some_data.count_of_polygons * 6, GL_UNSIGNED_INT,
                    facets);
-    glColor4f(r2, g2, b2, 1);
+    glColor4f(color[6], color[7], color[8], 1);
     glDrawElements(GL_LINES, some_data.count_of_polygons * 6, GL_UNSIGNED_INT,
                    facets);
     glDisableClientState(GL_VERTEX_ARRAY);
   }
-   saveSettings();
+  saveSettings();
 }
 
 void Widget::print_vertex() {
@@ -108,14 +110,14 @@ void Widget::print_poligons() {
 }
 
 void Widget::draw_vertex() {
-  if (type_point != 0) {
-    glPointSize(width);
+  if (set_vertex_line[0] != 0) {
+    glPointSize(set_vertex_line[1]);
     for (int i = 0; i < some_data.count_of_vertex + 1; i++) {
-      if (type_point == 1) {
+      if (set_vertex_line[0] == 1) {
         glEnable(GL_POINT_SMOOTH);
         glBegin(GL_POINT_SMOOTH);
         glEnd();
-      } else if (type_point == 2) {
+      } else if (set_vertex_line[0] == 2) {
         glDisable(GL_POINT_SMOOTH);
         glBegin(GL_POINT);
         glEnd();
@@ -240,73 +242,27 @@ void Widget::check_vertex_min_max(double check, int choise) {
 }
 
 void Widget::slot_rot_move(QVector<double> rmz) {
-    if (!path_to_file.isNull()) {
-        controller->rotation_by_ox(some_data, rmz[0]);
-        controller->rotation_by_oy(some_data, rmz[1]);
-        controller->rotation_by_oz(some_data, rmz[2]);
-        controller->move_obj(some_data, rmz[3], rmz[4], rmz[5]);
-        update();
-    }
+  if (!path_to_file.isNull()) {
+    controller->rotation_by_ox(some_data, rmz[0]);
+    controller->rotation_by_oy(some_data, rmz[1]);
+    controller->rotation_by_oz(some_data, rmz[2]);
+    controller->move_obj(some_data, rmz[3], rmz[4], rmz[5]);
+    update();
+  }
 }
-
-//void Widget::for_move(double x, double y, double z) {
-//  if (!path_to_file.isNull()) {
-//    controller->move_obj(some_data, x, y, z);
-//    update();
-//  }
-//}
-
-//void Widget::for_rot(double x, double y, double z) {
-//  if (!path_to_file.isNull()) {
-//    controller->rotation_by_ox(some_data, x);
-//    controller->rotation_by_oy(some_data, y);
-//    controller->rotation_by_oz(some_data, z);
-//    update();
-//  }
-//}
 
 void Widget::slot_zoom(double x) {
   controller->scale_obj(some_data, x);
   update();
 }
 
-void Widget::change_background_color(double x, double y, double z) {
-  r1 = x;
-  g1 = y;
-  b1 = z;
+void Widget::slot_color(QVector<double> color) {
+  this->color = color;
   update();
 }
 
-void Widget::change_vertex_color(double x, double y, double z) {
-  r = x;
-  g = y;
-  b = z;
-  update();
-}
-
-void Widget::change_vertex_size(double x) {
-  glPointSize(x);
-  update();
-}
-
-void Widget::change_edge_color(double x, double y, double z) {
-  r2 = x;
-  g2 = y;
-  b2 = z;
-  update();
-}
-
-void Widget::change_edge_size(double x) {
-  glLineWidth(x);
-  update();
-}
-void Widget::change_line_type(double x) {
-  line_type = x;
-  update();
-}
-
-void Widget::change_vertex_type(double x) {
-  type_point = x;
+void Widget::slot_vetex_and_line(QVector<int> setting) {
+  this->set_vertex_line = setting;
   update();
 }
 
@@ -316,48 +272,52 @@ void Widget::change_geo() {
 }
 
 void Widget::saveSettings() {
-    settings->sync();
-    settings->setValue("color_background_r2", r2);
-    settings->setValue("color_background_g2", g2);
-    settings->setValue("color_background_b2", b2);
-    settings->setValue("color_background_r1", r1);
-    settings->setValue("color_background_g1", g1);
-    settings->setValue("color_background_b1", b1);
-    settings->setValue("color_background_r", r);
-    settings->setValue("color_background_g", g);
-    settings->setValue("color_background_b", b);
-    settings->setValue("width_vertex", width);
-    settings->setValue("width_edge", width_edge);
-    settings->setValue("point_size", point_size);
-    settings->setValue("min_x", min_x);
-    settings->setValue("min_x", min_y);
-    settings->setValue("min_x", min_z);
-    settings->setValue("min_x", max_x);
-    settings->setValue("min_x", max_y);
-    settings->setValue("min_x", max_z);
-    settings->setValue("line_type", line_type);
-    settings->setValue("type_point", type_point);
+  settings->sync();
+  settings->setValue("color_background_r2", color[6]);
+  settings->setValue("color_background_g2", color[7]);
+  settings->setValue("color_background_b2", color[8]);
+  settings->setValue("color_background_r1", color[3]);
+  settings->setValue("color_background_g1", color[4]);
+  settings->setValue("color_background_b1", color[5]);
+  settings->setValue("color_background_r", color[0]);
+  settings->setValue("color_background_g", color[1]);
+  settings->setValue("color_background_b", color[2]);
+
+  settings->setValue("type_point", set_vertex_line[0]);
+  settings->setValue("width_vertex", set_vertex_line[1]);
+  settings->setValue("line_type", set_vertex_line[2]);
+  settings->setValue("width_edge", set_vertex_line[3]);
+
+  settings->setValue("point_size", point_size);
+  settings->setValue("min_x", min_x);
+  settings->setValue("min_x", min_y);
+  settings->setValue("min_x", min_z);
+  settings->setValue("min_x", max_x);
+  settings->setValue("min_x", max_y);
+  settings->setValue("min_x", max_z);
 }
 
 void Widget::loadSettings() {
-    r2 = settings->value("color_background_r2", 0.0).toDouble();
-    g2 = settings->value("color_background_g2", 0.0).toDouble();
-    b2 = settings->value("color_background_b2", 0.0).toDouble();
-    r1 = settings->value("color_background_r1", 255.0).toDouble();
-    g1 = settings->value("color_background_g1", 255.0).toDouble();
-    b1 = settings->value("color_background_b1", 255.0).toDouble();
-    r = settings->value("color_background_r", 0.0).toDouble();
-    g = settings->value("color_background_g", 0.0).toDouble();
-    b = settings->value("color_background_b", 0.0).toDouble();
-    width = settings->value("width_vertex", 3.0).toDouble();
-    width_edge = settings->value("width_edge", 5.0).toDouble();
-    point_size = settings->value("point_size", 5.0).toDouble();
-    min_x = settings->value("min_x", 0).toInt();
-    min_y = settings->value("min_y", 0).toInt();
-    min_z = settings->value("min_z", 0).toInt();
-    max_x = settings->value("max_x", 0).toInt();
-    max_y = settings->value("max_y", 0).toInt();
-    max_z = settings->value("max_z", 0).toInt();
-    line_type = settings->value("line_type", 1).toInt();
-    type_point = settings->value("type_point", 1).toInt();
+  color[6] = settings->value("color_background_r2", 0.0).toDouble();
+  color[7] = settings->value("color_background_g2", 0.0).toDouble();
+  color[8] = settings->value("color_background_b2", 0.0).toDouble();
+  color[3] = settings->value("color_background_r1", 255.0).toDouble();
+  color[4] = settings->value("color_background_g1", 255.0).toDouble();
+  color[5] = settings->value("color_background_b1", 255.0).toDouble();
+  color[0] = settings->value("color_background_r", 0.0).toDouble();
+  color[1] = settings->value("color_background_g", 0.0).toDouble();
+  color[2] = settings->value("color_background_b", 0.0).toDouble();
+
+  set_vertex_line[0] = settings->value("type_point", 1).toInt();
+  set_vertex_line[1] = settings->value("width_vertex", 3.0).toInt();
+  set_vertex_line[2] = settings->value("width_edge", 5.0).toInt();
+  set_vertex_line[3] = settings->value("line_type", 1).toInt();
+
+  point_size = settings->value("point_size", 5.0).toDouble();
+  min_x = settings->value("min_x", 0).toInt();
+  min_y = settings->value("min_y", 0).toInt();
+  min_z = settings->value("min_z", 0).toInt();
+  max_x = settings->value("max_x", 0).toInt();
+  max_y = settings->value("max_y", 0).toInt();
+  max_z = settings->value("max_z", 0).toInt();
 }

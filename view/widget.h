@@ -2,15 +2,15 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <glu.h>
+#include <GL/glu.h>
 #include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>
 #include <QMouseEvent>
 #include <QOpenGLFunctions>
+#include <QSettings>
 #include <QTimer>
 #include <QWidget>
-#include <QSettings>
 
 #include "../controller/controller.h"
 #include "../model/struct/struct.h"
@@ -31,11 +31,9 @@ class Widget : public QOpenGLWidget {
   QString path_to_file;
   void mousePressEvent(QMouseEvent *) override;
   void mouseMoveEvent(QMouseEvent *) override;
-  double r = 0, g = 0, b = 0, r1 = 255, g1 = 255, b1 = 255, r2 = 0, g2 = 0, b2 = 0;
-  double width = 3, width_edge = 5;
+  QVector<double> color{0, 0, 0, 255, 255, 255, 0, 0, 0};
+  QVector<int> set_vertex_line{0, 0, 0, 0};
   int min_x, max_x, min_y, max_y, min_z, max_z;
-  int line_type = 0;
-  int type_point = 0;
   double point_size;
   int flag_for_start;
   char *fiename_global;
@@ -50,20 +48,10 @@ class Widget : public QOpenGLWidget {
   void saveSettings();
 
  public slots:
-//  void for_move(double x, double y, double z);
-//  void for_rot(double x, double y, double z);
   void slot_zoom(double x);
   void slot_rot_move(QVector<double> rmz);
-
-  void change_background_color(double x, double y, double z);
-  void change_vertex_color(double x, double y, double z);
-  void change_edge_color(double x, double y, double z);
-
-  void change_vertex_size(double x);
-  void change_edge_size(double x);
-  void change_line_type(double x);
-  void change_vertex_type(double x);
-
+  void slot_color(QVector<double> color);
+  void slot_vetex_and_line(QVector<int> setting);
   void errors(int error);
   void change_geo();
 
