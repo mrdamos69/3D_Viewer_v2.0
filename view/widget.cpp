@@ -308,10 +308,10 @@ void Widget::loadSettings() {
   color[1] = settings->value("color_background_g", 0.0).toDouble();
   color[2] = settings->value("color_background_b", 0.0).toDouble();
 
-  set_vertex_line[0] = settings->value("type_point", 1).toInt();
-  set_vertex_line[1] = settings->value("width_vertex", 3.0).toInt();
-  set_vertex_line[2] = settings->value("width_edge", 5.0).toInt();
-  set_vertex_line[3] = settings->value("line_type", 1).toInt();
+  set_vertex_line[0] = settings->value("type_point", 0).toInt();
+  set_vertex_line[1] = settings->value("width_vertex", 0).toInt();
+  set_vertex_line[2] = settings->value("line_type", 2).toInt();
+  set_vertex_line[3] = settings->value("width_edge", 0).toInt();
 
   point_size = settings->value("point_size", 5.0).toDouble();
   min_x = settings->value("min_x", 0).toInt();

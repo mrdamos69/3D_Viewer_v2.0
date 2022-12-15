@@ -110,7 +110,11 @@ void view::create_screen() {
   }
 }
 
-void view::on_start_image_clicked() { flag = 1; }
+void view::on_start_image_clicked() {
+  if (ui->download_obj->isCheckable()) {
+    flag = 1;
+  }
+}
 
 void view::on_stop_image_clicked() {
   if (ui->download_obj->isCheckable()) {

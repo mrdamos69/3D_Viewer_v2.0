@@ -111,7 +111,7 @@ void s21::Parser::help_funk_vertexes_polygons(std::string &lineptr,
                                               int &count_polygon) {
   int tmp_polygon;
   int j = 0;
-  char *temp_date = lineptr.data();
+  const char *temp_date = lineptr.data();
   some_data.polygons[count_polygon].vertexes =
       new int[some_data.polygons[count_polygon].numbers_of_vertexes_in_facets *
               2];
