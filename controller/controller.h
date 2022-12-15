@@ -8,16 +8,16 @@ namespace s21 {
 
 class Controller {
  private:
-   Model model;
-    static Controller* controller_;
-    Controller() { model.get_model(); }
-    ~Controller() { delete controller_; }
+  Model model;
+  static Controller *controller_;
+  Controller() { model.get_model(); }
+  ~Controller() { delete controller_; }
 
  public:
- static Controller* get_controller() {
-        if (!controller_) controller_ = new Controller();
-        return controller_;
-    }
+  static Controller *get_controller() {
+    if (!controller_) controller_ = new Controller();
+    return controller_;
+  }
   int is_digit(char expression);
   bool count_vertexes_polygons(std::string &path_of_file, data_t &some_data);
   bool create_matrix_obj(std::string &path_of_file, data_t &some_data);

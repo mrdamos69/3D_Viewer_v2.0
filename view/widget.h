@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <glu.h>
+#include <GL/glu.h>
 #include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>
@@ -27,7 +27,7 @@ class Widget : public QOpenGLWidget {
   ~Widget();
   double xRot, yRot, zRot;
   QPoint mPos;
-  QString path_to_file = NULL;
+  QString path_to_file;
   void mousePressEvent(QMouseEvent *) override;
   void mouseMoveEvent(QMouseEvent *) override;
   double r = 0, g = 0, b = 0;
@@ -46,6 +46,7 @@ class Widget : public QOpenGLWidget {
   char *name_of_file;
   s21::data_t some_data;
   QString label_with_inf;
+  void parcing_3d_files();
 
  public slots:
   void for_move(double x, double y, double z);
@@ -64,12 +65,15 @@ class Widget : public QOpenGLWidget {
  private:
   Ui::Widget *ui;
   s21::Controller *controller = nullptr;
-  void initializeGL() override;
   void resizeGL(int w, int h) override;
   void paintGL() override;
   int validation_of_files(std::string &name_file);
-  void parcing_3d_files();
   void check_vertex_min_max(double check, int choise);
+  void print_vertex();
+  void print_poligons();
+  void draw_vertex();
+  void set_line_type(int value);
   void open_file();
+  void clean_memory();
 };
 #endif  // WIDGET_H

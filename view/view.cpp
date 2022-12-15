@@ -44,9 +44,9 @@ void view::on_change_vertex_color_clicked() {
     p_test->change_vertex_color(col.selectedColor().redF(),
                                 col.selectedColor().greenF(),
                                 col.selectedColor().blueF());
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_edge_color_clicked() {
@@ -58,25 +58,25 @@ void view::on_change_edge_color_clicked() {
     p_test->change_edge_color(col.selectedColor().redF(),
                               col.selectedColor().greenF(),
                               col.selectedColor().blueF());
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_cBox_vertex_type_activated(int index) {
   if (ui->download_obj->isCheckable()) {
     switch (index) {
       case 0:
-        p_test->change_vertex_type(1);
+        p_test->change_vertex_type(index);
         break;
       case 1:
-        p_test->change_vertex_type(2);
+        p_test->change_vertex_type(index);
         break;
       case 2:
-        p_test->change_vertex_type(3);
+        p_test->change_vertex_type(index);
         break;
       default:
-        p_test->change_vertex_type(1);
+        p_test->change_vertex_type(0);
         break;
     }
     p_test->update();
@@ -99,27 +99,28 @@ void view::create_screen() {
 void view::on_start_image_clicked() { flag = 1; }
 
 void view::on_stop_image_clicked() {
-//          flag = 0;
-//              QString fileName = QFileDialog::getSaveFileName(this, tr("Save screenshot"), "", tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
-//              QGifImage gif(QSize(640, 480)); QVector<QRgb>
-//              ctable; ctable << qRgb(255, 255, 255)
-//                     << qRgb(0, 0, 0)
-//                     << qRgb(255, 0, 0)
-//                     << qRgb(0, 255, 0)
-//                     << qRgb(0, 0, 255)
-//                     << qRgb(255, 255, 0)
-//                     << qRgb(0, 255, 255)
-//                     << qRgb(255, 0, 255);
+  // flag = 0;
+  // QString fileName = QFileDialog::getSaveFileName(this, tr("Save
+  // screenshot"), "", tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
+  // QGifImage gif(QSize(640, 480)); QVector<QRgb>
+  // ctable; ctable << qRgb(255, 255, 255)
+  //       << qRgb(0, 0, 0)
+  //       << qRgb(255, 0, 0)
+  //       << qRgb(0, 255, 0)
+  //       << qRgb(0, 0, 255)
+  //       << qRgb(255, 255, 0)
+  //       << qRgb(0, 255, 255)
+  //       << qRgb(255, 0, 255);
 
-//              gif.setGlobalColorTable(ctable, Qt::black);
-//              gif.setDefaultTransparentColor(Qt::black);
-//              gif.setDefaultDelay(100);
+  // gif.setGlobalColorTable(ctable, Qt::black);
+  // gif.setDefaultTransparentColor(Qt::black);
+  // gif.setDefaultDelay(100);
 
-//              for (QVector<QImage>::Iterator img = mas_image.begin(); img !=
-//              mas_image.end(); ++img) {
-//                  gif.addFrame(*img);
-//              }
-//              gif.save(fileName);
+  // for (QVector<QImage>::Iterator img = mas_image.begin(); img !=
+  // mas_image.end(); ++img) {
+  //     gif.addFrame(*img);
+  // }
+  // gif.save(fileName);
 }
 
 void view::information_of_file() {
@@ -172,115 +173,115 @@ void view::on_cBox_line_type_activated(int index) {
   if (ui->download_obj->isCheckable()) {
     p_test->line_type = index;
     p_test->change_line_type(p_test->line_type);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_rot_x_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[0] = ui->dSpinBox_rot->value();
+    rot[0] = M_PI / 180.0 * ui->dSpinBox_rot->value();
     p_test->for_rot(rot[0], rot[1], rot[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_rot_x2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[0] = ui->dSpinBox_rot->value() * (-1);
+    rot[0] = M_PI / 180.0 * (-ui->dSpinBox_rot->value());
     p_test->for_rot(rot[0], rot[1], rot[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_rot_y_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[1] = ui->dSpinBox_rot_2->value();
+    rot[1] = M_PI / 180.0 * ui->dSpinBox_rot_2->value();
     p_test->for_rot(rot[0], rot[1], rot[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_rot_y2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[1] = ui->dSpinBox_rot_2->value() * (-1);
+    rot[1] = M_PI / 180.0 * (-ui->dSpinBox_rot_2->value());
     p_test->for_rot(rot[0], rot[1], rot[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_rot_z_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[2] = ui->dSpinBox_rot_3->value();
+    rot[2] = M_PI / 180.0 * ui->dSpinBox_rot_3->value();
     p_test->for_rot(rot[0], rot[1], rot[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_rot_z2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    rot[2] = ui->dSpinBox_rot_3->value() * (-1);
+    rot[2] = M_PI / 180.0 * (-ui->dSpinBox_rot_3->value() * (-1));
     p_test->for_rot(rot[0], rot[1], rot[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_move_x_pressed() {
   if (ui->download_obj->isCheckable()) {
     move[0] = ui->dSpinBox_move->value();
-    p_test->for_move(move[0], move[1], move[2]);
+    p_test->for_move(move[0], 0, 0);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_move_x2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[0] = ui->dSpinBox_move->value() * (-1);
-    p_test->for_move(move[0], move[1], move[2]);
+    move[0] = (-ui->dSpinBox_move->value());
+    p_test->for_move(move[0], 0, 0);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_move_y_pressed() {
   if (ui->download_obj->isCheckable()) {
     move[1] = ui->dSpinBox_move_2->value();
-    p_test->for_move(move[0], move[1], move[2]);
+    p_test->for_move(0, move[1], 0);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_move_y2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[1] = ui->dSpinBox_move_2->value() * (-1);
-    p_test->for_move(move[0], move[1], move[2]);
+    move[1] = (-ui->dSpinBox_move_2->value());
+    p_test->for_move(0, move[1], 0);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_move_z_pressed() {
   if (ui->download_obj->isCheckable()) {
     move[2] = ui->dSpinBox_move_3->value();
-    p_test->for_move(move[0], move[1], move[2]);
+    p_test->for_move(0, 0, move[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }
 
 void view::on_change_move_z2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    move[2] = ui->dSpinBox_move_3->value() * (-1);
-    p_test->for_move(move[0], move[1], move[2]);
+    move[2] = (-ui->dSpinBox_move_3->value());
+    p_test->for_move(0, 0, move[2]);
+    p_test->update();
+    create_screen();
   }
-  p_test->update();
-  create_screen();
 }

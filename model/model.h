@@ -2,26 +2,26 @@
 #define MODEL_H
 
 #include "parser/parser.h"
-#include "transform/transform.h"
 #include "struct/struct.h"
+#include "transform/transform.h"
 namespace s21 {
 
 class Model {
-private:
-    Parser parser;
-    Transform transform;
-    static Model* model_;
+ private:
+  Parser parser;
+  Transform transform;
+  static Model *model_;
 
-public:
-    Model() {
-        parser.get_parser();
-        transform.get_transform();
-    }
-    ~Model() { delete model_; }
-    static Model* get_model() {
-        if (!model_) model_ = new Model();
-        return model_;
-    }
+ public:
+  Model() {
+    parser.get_parser();
+    transform.get_transform();
+  }
+  ~Model() { delete model_; }
+  static Model *get_model() {
+    if (!model_) model_ = new Model();
+    return model_;
+  }
 
   /* functions for parsing .obj */
   bool is_digit(char expression);
@@ -38,7 +38,6 @@ public:
   void rotation_by_oz(data_t &some_data, double corner);
   void scale_obj(data_t &some_data, double scale);
   void get_max_min_frustum(double *max, double *min, data_t obj);
-
 };
 
 }  // namespace s21
