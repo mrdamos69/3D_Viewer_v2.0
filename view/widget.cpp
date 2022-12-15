@@ -10,6 +10,8 @@ Widget::Widget(QWidget *parent) : QOpenGLWidget(parent), ui(new Ui::Widget) {
   setWindowTitle("the visualaze_3d_object");
   setGeometry(10, 10, 1150, 870);
   this->parcing_3d_files();
+  settings = new QSettings(QCoreApplication::applicationDirPath() + "/setting.ini", QSettings::IniFormat);
+  loadSettings();
 }
 
 Widget::~Widget() {
@@ -70,6 +72,7 @@ void Widget::paintGL() {
                    facets);
     glDisableClientState(GL_VERTEX_ARRAY);
   }
+   saveSettings();
 }
 
 void Widget::print_vertex() {
@@ -310,4 +313,51 @@ void Widget::change_vertex_type(double x) {
 void Widget::change_geo() {
   repaint();
   update();
+}
+
+void Widget::saveSettings() {
+    settings->sync();
+    settings->setValue("color_background_r2", r2);
+    settings->setValue("color_background_g2", g2);
+    settings->setValue("color_background_b2", b2);
+    settings->setValue("color_background_r1", r1);
+    settings->setValue("color_background_g1", g1);
+    settings->setValue("color_background_b1", b1);
+    settings->setValue("color_background_r", r);
+    settings->setValue("color_background_g", g);
+    settings->setValue("color_background_b", b);
+    settings->setValue("width_vertex", width);
+    settings->setValue("width_edge", width_edge);
+    settings->setValue("point_size", point_size);
+    settings->setValue("min_x", min_x);
+    settings->setValue("min_x", min_y);
+    settings->setValue("min_x", min_z);
+    settings->setValue("min_x", max_x);
+    settings->setValue("min_x", max_y);
+    settings->setValue("min_x", max_z);
+    settings->setValue("line_type", line_type);
+    settings->setValue("type_point", type_point);
+}
+
+void Widget::loadSettings() {
+    r2 = settings->value("color_background_r2", 0.0).toDouble();
+    g2 = settings->value("color_background_g2", 0.0).toDouble();
+    b2 = settings->value("color_background_b2", 0.0).toDouble();
+    r1 = settings->value("color_background_r1", 0.0).toDouble();
+    g1 = settings->value("color_background_g1", 0.0).toDouble();
+    b1 = settings->value("color_background_b1", 0.0).toDouble();
+    r = settings->value("color_background_r", 0.0).toDouble();
+    g = settings->value("color_background_g", 0.0).toDouble();
+    b = settings->value("color_background_b", 0.0).toDouble();
+    width = settings->value("width_vertex", 0.0).toDouble();
+    width_edge = settings->value("width_edge", 0.0).toDouble();
+    point_size = settings->value("point_size", 0.0).toDouble();
+    min_x = settings->value("min_x", 0).toInt();
+    min_y = settings->value("min_y", 0).toInt();
+    min_z = settings->value("min_z", 0).toInt();
+    max_x = settings->value("max_x", 0).toInt();
+    max_y = settings->value("max_y", 0).toInt();
+    max_z = settings->value("max_z", 0).toInt();
+    line_type = settings->value("line_type", 0).toInt();
+    type_point = settings->value("type_point", 0).toInt();
 }

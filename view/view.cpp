@@ -6,7 +6,9 @@ view::view(QWidget *parent) : QMainWindow(parent), scale(1), ui(new Ui::view) {
   ui->setupUi(this);
 }
 
-view::~view() { delete ui; }
+view::~view() {
+    delete ui;
+}
 
 void view::on_download_obj_clicked() {
   p_test = new Widget(this);

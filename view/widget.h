@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <GL/glu.h>
+#include <glu.h>
 #include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>
@@ -10,6 +10,7 @@
 #include <QOpenGLFunctions>
 #include <QTimer>
 #include <QWidget>
+#include <QSettings>
 
 #include "../controller/controller.h"
 #include "../model/struct/struct.h"
@@ -30,10 +31,8 @@ class Widget : public QOpenGLWidget {
   QString path_to_file;
   void mousePressEvent(QMouseEvent *) override;
   void mouseMoveEvent(QMouseEvent *) override;
-  double r = 0, g = 0, b = 0;
-  double r1 = 255, g1 = 255, b1 = 255;
-  double r2 = 0, g2 = 0, b2 = 0;
-  double width = 5, width_edge = 2;
+  double r = 0, g = 0, b = 0, r1 = 255, g1 = 255, b1 = 255, r2 = 0, g2 = 0, b2 = 0;
+  double width = 3, width_edge = 5;
   int min_x, max_x, min_y, max_y, min_z, max_z;
   int line_type = 0;
   int type_point = 0;
@@ -47,6 +46,8 @@ class Widget : public QOpenGLWidget {
   s21::data_t some_data;
   QString label_with_inf;
   void parcing_3d_files();
+  void loadSettings();
+  void saveSettings();
 
  public slots:
 //  void for_move(double x, double y, double z);
@@ -69,6 +70,7 @@ class Widget : public QOpenGLWidget {
  private:
   Ui::Widget *ui;
   s21::Controller *controller = nullptr;
+  QSettings *settings;
   void resizeGL(int w, int h) override;
   void paintGL() override;
   int validation_of_files(std::string &name_file);
