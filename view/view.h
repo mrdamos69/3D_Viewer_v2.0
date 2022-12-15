@@ -10,6 +10,7 @@
 #include <QSize>
 #include <QVector>
 
+#include "../QtGifImage-master/src/gifimage/qgifimage.h"
 #include "widget.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,8 +29,9 @@ class view : public QMainWindow {
   double scale;
   Widget *p_test;
   QVector<QImage> mas_image;
-  QVector<double> rot{0, 0, 0};
-  QVector<double> move{0, 0, 0};
+  QVector<double> coordinates{0, 0, 0, 0, 0, 0, 0};
+  QVector<double> color{0, 0, 0, 0, 0, 0, 0, 0, 0};
+  QVector<int> set_vertex_line{0, 0, 0, 0};
 
  private slots:
   void on_download_obj_clicked();
@@ -88,5 +90,11 @@ class view : public QMainWindow {
 
  private:
   Ui::view *ui;
+
+ signals:
+  void signal_zoom(double);
+  void signal_rot_move(QVector<double>);
+  void signal_color(QVector<double>);
+  void signal_vetex_and_line(QVector<int>);
 };
 #endif  // VIEW_H
