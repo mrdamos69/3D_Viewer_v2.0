@@ -582,6 +582,9 @@ Color</string>
        <property name="text">
         <string>Central</string>
        </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -594,6 +597,9 @@ Color</string>
        <property name="text">
         <string>Parellel</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>
@@ -605,7 +611,7 @@ Color</string>
      <x>0</x>
      <y>0</y>
      <width>1600</width>
-     <height>27</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

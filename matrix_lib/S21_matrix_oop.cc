@@ -22,10 +22,8 @@ S21Matrix::S21Matrix(const S21Matrix &other) {
 }
 
 S21Matrix::S21Matrix(S21Matrix &&other) {
-  // if (matrix) {
   for (int i = 0; i < rows; i++) delete[] matrix[i];
   delete[] matrix;
-  // }
   *this = other;
   other.matrix = nullptr;
   other.rows = other.cols = 0;
