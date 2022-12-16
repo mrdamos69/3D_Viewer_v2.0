@@ -42,7 +42,7 @@ gcov_report:
 install:
 	@make clean
 	@mkdir build
-	@cd view && qmake && make && make clean && rm Makefile && cd ../ && mkdir build && mv view/view.app build/
+	@cd view && qmake && make && make clean && rm Makefile && cd ../ && mv view/view.app build/
 	
 uninstall:
 	@rm -rf build*
