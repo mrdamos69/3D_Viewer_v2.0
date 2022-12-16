@@ -11,7 +11,7 @@ class Controller {
   Model model;
   static Controller *controller_;
   Controller() {}
-  ~Controller() { delete controller_;}
+  ~Controller() { delete controller_; }
 
  public:
   static Controller *get_controller() {

@@ -93,7 +93,7 @@ class view : public QMainWindow {
 
   void on_radioButton_2_clicked();
 
-private:
+ private:
   Ui::view *ui;
 
  signals:

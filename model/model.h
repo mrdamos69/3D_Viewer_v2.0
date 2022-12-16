@@ -12,8 +12,7 @@ class Model {
   Transform transform;
 
  public:
-  Model() {
-  }
+  Model() {}
   ~Model() {}
 
   /* functions for parsing .obj */

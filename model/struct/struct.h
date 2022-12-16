@@ -12,11 +12,12 @@ struct polygon_t {
 struct data_t {
   data_t() : count_of_vertex(0), count_of_polygons(0) {}
   ~data_t() {}
+
  public:
   int count_of_vertex;
   int count_of_polygons;
   S21Matrix matrix;
   polygon_t *polygons;
 };
-}
-#endif // STRUCT_H_
+}  // namespace s21
+#endif  // STRUCT_H_

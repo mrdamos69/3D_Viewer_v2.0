@@ -73,13 +73,13 @@ clean:
 	@rm -f RESULT_VALGRIND.txt
 
 check:
-# @cp ../materials/linters/.clang-format ./
-# @cd view && clang-format -i ./*.cc ./*.h
+    @cp ../materials/linters/.clang-format ./
+    @cd view && clang-format -i ./*.cc ./*.h
 	@cd model && clang-format -i ./*.cc ./*.h
 	@cd controller && clang-format -i ./*.cc ./*.h
 	@cd matrix_lib && clang-format -i ./*.cc ./*.h
 	@cd view && clang-format -i ./*.cpp ./*.h
-# @rm -rf .clang-format
+    @rm -rf .clang-format
 
 cppcheck:
 	@cppcheck --enable=all --suppress=missingIncludeSystem $(ALL_FILE_CC)
