@@ -84,7 +84,7 @@ void Widget::paintGL() {
   saveSettings();
 }
 
-void Widget::slot_geometry(bool clicked) {
+void Widget::slot_geometry(bool &clicked) {
     this->change_geometry = clicked;
     update();
 }
