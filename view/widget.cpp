@@ -28,6 +28,10 @@ void Widget::clean_memory() {
   }
 }
 
+void Widget::initializeGL() {
+    glEnable(GL_DEPTH_TEST);
+}
+
 void Widget::resizeGL(int w, int h) {
   glViewport(0, 0, w, h);
   glMatrixMode(GL_PROJECTION);
@@ -42,10 +46,13 @@ void Widget::resizeGL(int w, int h) {
   } else if (max > qFabs(min)) {
     min = -max;
   }
-  double coef = 1.2;
-  max *= coef;
-  min *= coef;
-  glOrtho(min, max, min, max, min, max);
+  max *= 1.2;
+  min *= 1.2;
+  if (change_geometry) {
+  glOrtho(min, max, min, max, 100 * min, 100 * max);
+  } else {
+  glFrustum(min, max, min, max, 100 * min, 100 * max);
+    }
 }
 
 void Widget::paintGL() {
@@ -75,6 +82,11 @@ void Widget::paintGL() {
     glDisableClientState(GL_VERTEX_ARRAY);
   }
   saveSettings();
+}
+
+void Widget::slot_geometry(bool clicked) {
+    this->change_geometry = clicked;
+    update();
 }
 
 void Widget::print_vertex() {

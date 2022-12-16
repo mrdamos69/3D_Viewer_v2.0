@@ -26,6 +26,7 @@ class view : public QMainWindow {
   view(QWidget *parent = nullptr);
   ~view();
   int flag = 0;
+  bool click = true;
   double scale;
   Widget *p_test;
   QVector<QImage> mas_image;
@@ -88,7 +89,11 @@ class view : public QMainWindow {
 
   void on_change_move_z2_pressed();
 
- private:
+  void on_radioButton_clicked();
+
+  void on_radioButton_2_clicked();
+
+private:
   Ui::view *ui;
 
  signals:
@@ -96,5 +101,6 @@ class view : public QMainWindow {
   void signal_rot_move(QVector<double>);
   void signal_color(QVector<double>);
   void signal_vetex_and_line(QVector<int>);
+  void signal_geometry(bool);
 };
 #endif  // VIEW_H

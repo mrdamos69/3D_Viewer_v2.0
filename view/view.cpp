@@ -277,3 +277,22 @@ void view::on_change_move_z2_pressed() {
     create_screen();
   }
 }
+
+void view::on_radioButton_clicked() {
+    if (ui->download_obj->isCheckable()) {
+      this->click = true;
+      emit signal_geometry(this->click);
+      create_screen();
+    }
+}
+
+
+void view::on_radioButton_2_clicked()
+{
+    if (ui->download_obj->isCheckable()) {
+      this->click = false;
+      emit signal_geometry(this->click);
+      create_screen();
+    }
+}
+
