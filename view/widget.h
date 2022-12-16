@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <GL/glu.h>
+#include <glu.h>
 #include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>
@@ -37,7 +37,7 @@ class Widget : public QOpenGLWidget {
   double point_size;
   int flag_for_start;
   char *fiename_global;
-  int change_geometry = 0;
+  bool change_geometry = true;
   double *vertex;
   unsigned int *facets;
   char *name_of_file;
@@ -52,6 +52,7 @@ class Widget : public QOpenGLWidget {
   void slot_rot_move(QVector<double> rmz);
   void slot_color(QVector<double> color);
   void slot_vetex_and_line(QVector<int> setting);
+  void slot_geometry(bool clicked);
   void errors(int error);
   void change_geo();
 
@@ -59,6 +60,7 @@ class Widget : public QOpenGLWidget {
   Ui::Widget *ui;
   s21::Controller *controller = nullptr;
   QSettings *settings;
+  void initializeGL() override;
   void resizeGL(int w, int h) override;
   void paintGL() override;
   int validation_of_files(std::string &name_file);
