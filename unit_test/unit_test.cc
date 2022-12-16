@@ -10,9 +10,8 @@ TEST(MODEL, parser_with_file) {
   s21::data_t some_data;
   s21::Model test;
   std::string path_of_file = "./obj/coob.obj";
-  ASSERT_TRUE(test.count_vertexes_polygons(path_of_file, some_data));
-  ASSERT_TRUE(test.create_matrix_obj(path_of_file, some_data));
-  ASSERT_TRUE(test.note_vertexes_polygons(path_of_file, some_data));
+  ASSERT_TRUE(!test.count_vertexes_polygons(path_of_file, some_data));
+  ASSERT_TRUE(!test.create_matrix_obj(path_of_file, some_data));
 }
 
 TEST(MODEL, parser_with_file_2) {
@@ -21,7 +20,6 @@ TEST(MODEL, parser_with_file_2) {
   s21::Model test;
   ASSERT_FALSE(test.count_vertexes_polygons(path_of_file, some_data));
   ASSERT_FALSE(test.create_matrix_obj(path_of_file, some_data));
-  ASSERT_FALSE(test.note_vertexes_polygons(path_of_file, some_data));
 }
 
 TEST(MODEL, move_obj) {

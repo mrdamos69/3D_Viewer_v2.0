@@ -7,6 +7,7 @@
 #include "ui_widget.h"
 
 Widget::Widget(QWidget *parent) : QOpenGLWidget(parent), ui(new Ui::Widget) {
+  controller = controller->get_controller();
   setWindowTitle("the visualaze_3d_object");
   setGeometry(10, 10, 1150, 870);
   this->parcing_3d_files();
@@ -25,6 +26,9 @@ void Widget::clean_memory() {
   if (vertex != nullptr && facets != nullptr) {
     delete[] vertex;
     delete[] facets;
+    for (int i = 0; i < some_data.count_of_vertex; i++)
+        delete[] some_data.polygons[i].vertexes;
+    delete[] some_data.polygons;
   }
 }
 
@@ -36,23 +40,7 @@ void Widget::resizeGL(int w, int h) {
   glViewport(0, 0, w, h);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  double min = 0.0;
-  double max = 0.0;
-  if (!path_to_file.isNull()) {
-    controller->get_max_min_frustum(&max, &min, some_data);
-  }
-  if (qFabs(min) > max) {
-    max = qFabs(min);
-  } else if (max > qFabs(min)) {
-    min = -max;
-  }
-  max *= 1.2;
-  min *= 1.2;
-  if (change_geometry) {
-  glOrtho(min, max, min, max, 100 * min, 100 * max);
-  } else {
-  glFrustum(min, max, min, max, 100 * min, 100 * max);
-    }
+  switch_geometry();
 }
 
 void Widget::paintGL() {
@@ -84,7 +72,23 @@ void Widget::paintGL() {
   saveSettings();
 }
 
-void Widget::slot_geometry(bool &clicked) {
+void Widget::switch_geometry() {
+    double min = 0.0;
+    double max = 0.0;
+    if (!path_to_file.isNull()) {
+      controller->get_max_min_frustum(&max, &min, some_data);
+    }
+    if (qFabs(min) > max) {
+      max = qFabs(min);
+    } else if (max > qFabs(min)) {
+      min = -max;
+    }
+    max *= 1.2;
+    min *= 1.2;
+    (change_geometry) ? glOrtho(min, max, min, max, 100 * min, 100 * max) : glFrustum(min, max, min, max, 100 * min, 100 * max);
+}
+
+void Widget::slot_geometry(bool clicked) {
     this->change_geometry = clicked;
     update();
 }

@@ -11,14 +11,9 @@
 namespace s21 {
 class Transform {
 private:
-    static Transform* transform;
  public:
     Transform() {}
-    ~Transform() { delete transform; }
-    static Transform* get_transform() {
-           if (!transform) transform = new Transform();
-           return transform;
-      }
+    ~Transform() {}
  public:
   void move_obj(data_t &some_data, double x, double y, double z);
   void rotation_by_ox(data_t &some_data, double corner);

@@ -10,18 +10,11 @@ class Model {
  private:
   Parser parser;
   Transform transform;
-  static Model *model_;
 
  public:
   Model() {
-    parser.get_parser();
-    transform.get_transform();
   }
-  ~Model() { delete model_; }
-  static Model *get_model() {
-    if (!model_) model_ = new Model();
-    return model_;
-  }
+  ~Model() {}
 
   /* functions for parsing .obj */
   bool is_digit(char expression);

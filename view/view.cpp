@@ -15,6 +15,7 @@ void view::on_download_obj_clicked() {
   connect(this, &view::signal_color, p_test, &Widget::slot_color);
   connect(this, &view::signal_vetex_and_line, p_test,
           &Widget::slot_vetex_and_line);
+  connect(this, &view::signal_geometry, p_test, &Widget::slot_geometry);
 
   p_test->show();
   create_screen();

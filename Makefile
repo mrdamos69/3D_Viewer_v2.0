@@ -72,9 +72,6 @@ clean:
 	@rm -rf build
 	@rm -f RESULT_VALGRIND.txt
 
-leaks: test
-	@CK_FORK=no valgrind --vgdb=no --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./tests.o
-
 check:
 # @cp ../materials/linters/.clang-format ./
 # @cd view && clang-format -i ./*.cc ./*.h
