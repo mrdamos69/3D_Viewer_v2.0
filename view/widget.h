@@ -52,7 +52,7 @@ class Widget : public QOpenGLWidget {
   void slot_rot_move(QVector<double> rmz);
   void slot_color(QVector<double> color);
   void slot_vetex_and_line(QVector<int> setting);
-  void slot_geometry(bool clicked);
+  void slot_geometry(bool &clicked);
   void errors(int error);
   void change_geo();
 
