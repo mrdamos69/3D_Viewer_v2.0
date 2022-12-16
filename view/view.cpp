@@ -188,6 +188,7 @@ void view::on_change_rot_x_pressed() {
     this->coordinates[0] = M_PI / 180.0 * ui->dSpinBox_rot->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[0] = 0;
   }
 }
 
@@ -196,6 +197,7 @@ void view::on_change_rot_x2_pressed() {
     this->coordinates[0] = M_PI / 180.0 * (-ui->dSpinBox_rot->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[0] = 0;
   }
 }
 
@@ -204,6 +206,7 @@ void view::on_change_rot_y_pressed() {
     this->coordinates[1] = M_PI / 180.0 * ui->dSpinBox_rot_2->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[1] = 0;
   }
 }
 
@@ -212,6 +215,7 @@ void view::on_change_rot_y2_pressed() {
     this->coordinates[1] = M_PI / 180.0 * (-ui->dSpinBox_rot_2->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[1] = 0;
   }
 }
 
@@ -220,6 +224,7 @@ void view::on_change_rot_z_pressed() {
     this->coordinates[2] = M_PI / 180.0 * ui->dSpinBox_rot_3->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[2] = 0;
   }
 }
 
@@ -228,6 +233,7 @@ void view::on_change_rot_z2_pressed() {
     this->coordinates[2] = M_PI / 180.0 * (-ui->dSpinBox_rot_3->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[2] = 0;
   }
 }
 
@@ -236,6 +242,7 @@ void view::on_change_move_x_pressed() {
     this->coordinates[3] = ui->dSpinBox_move->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[3] = 0;
   }
 }
 
@@ -244,6 +251,7 @@ void view::on_change_move_x2_pressed() {
     this->coordinates[3] = (-ui->dSpinBox_move->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[3] = 0;
   }
 }
 
@@ -252,6 +260,7 @@ void view::on_change_move_y_pressed() {
     this->coordinates[4] = ui->dSpinBox_move_2->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[4] = 0;
   }
 }
 
@@ -260,22 +269,25 @@ void view::on_change_move_y2_pressed() {
     this->coordinates[4] = (-ui->dSpinBox_move_2->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[4] = 0;
   }
 }
 
 void view::on_change_move_z_pressed() {
   if (ui->download_obj->isCheckable()) {
-    this->coordinates[4] = ui->dSpinBox_move_3->value();
+    this->coordinates[5] = ui->dSpinBox_move_3->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[5] = 0;
   }
 }
 
 void view::on_change_move_z2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    this->coordinates[4] = (-ui->dSpinBox_move_3->value());
+    this->coordinates[5] = (-ui->dSpinBox_move_3->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[5] = 0;
   }
 }
 
