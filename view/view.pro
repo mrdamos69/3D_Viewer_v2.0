@@ -9,6 +9,14 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../QtGifImage-master/src/3rdParty/giflib/dgif_lib.c \
+    ../QtGifImage-master/src/3rdParty/giflib/egif_lib.c \
+    ../QtGifImage-master/src/3rdParty/giflib/gif_err.c \
+    ../QtGifImage-master/src/3rdParty/giflib/gif_font.c \
+    ../QtGifImage-master/src/3rdParty/giflib/gif_hash.c \
+    ../QtGifImage-master/src/3rdParty/giflib/gifalloc.c \
+    ../QtGifImage-master/src/3rdParty/giflib/quantize.c \
+    ../QtGifImage-master/src/gifimage/qgifimage.cpp \
     ../controller/controller.cc \
     ../matrix_lib/S21_matrix_oop.cc \
     ../model/model.cc \
@@ -19,6 +27,12 @@ SOURCES += \
     widget.cpp
 
 HEADERS += \
+    ../QtGifImage-master/src/3rdParty/giflib/gif_hash.h \
+    ../QtGifImage-master/src/3rdParty/giflib/gif_lib.h \
+    ../QtGifImage-master/src/3rdParty/giflib/gif_lib_private.h \
+    ../QtGifImage-master/src/gifimage/qgifglobal.h \
+    ../QtGifImage-master/src/gifimage/qgifimage.h \
+    ../QtGifImage-master/src/gifimage/qgifimage_p.h \
     ../controller/controller.h \
     ../matrix_lib/S21_matrix_oop.h \
     ../model/model.h \
@@ -39,10 +53,17 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 SUBDIRS += \
     ../QtGifImage-master/qtgifimage.pro \
-    ../QtGifImage-master/qtgifimage.pro
+    ../QtGifImage-master/qtgifimage.pro \
+    ../QtGifImage-master/src/gifimage/gifimage.pro \
+    ../QtGifImage-master/src/gifimage/gifimage.pro \
+    ../QtGifImage-master/src/gifimage/gifimage.pro
 
 DISTFILES += \
     ../QtGifImage-master/README.md \
     ../QtGifImage-master/index.qdoc \
     ../QtGifImage-master/qtgifimage.qdoc \
+    ../QtGifImage-master/src/3rdParty/giflib/AUTHORS \
+    ../QtGifImage-master/src/3rdParty/giflib/COPYING \
+    ../QtGifImage-master/src/3rdParty/giflib/README \
+    ../QtGifImage-master/src/gifimage/qtgifimage.pri \
     ../QtGifImage-master/sync.profile

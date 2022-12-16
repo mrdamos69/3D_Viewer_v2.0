@@ -4,8 +4,12 @@ FLAG =
 FLAG_C = -c 
 CL_11 = -std=c++17 -Wall -Wextra -Werror
 PR_NAME = s21_3D_Viewer_v2
-ALL_FILE_CC = ./model/model.cc ./controller/controller.cc ./matrix_lib/S21_matrix_oop.cc
-ALL_FILE_H = ./model/model.h ./controller/controller.h ./matrix_lib/S21_matrix_oop.h
+
+ALL_FILE_CC = ./model/model.cc ./controller/controller.cc ./matrix_lib/S21_matrix_oop.cc \
+			./model/parser/parser.cc ./model/transform/transform.cc
+
+ALL_FILE_H = ./model/model.h ./controller/controller.h ./matrix_lib/S21_matrix_oop.h \
+			./model/parser/parser.h ./model/transform/transform.h ./model/struct/struct.h
 ALL_FILE_O = model.o
 
 ifeq ($(OS), Darwin)
@@ -38,7 +42,7 @@ gcov_report:
 install:
 	@make clean
 	@mkdir build
-	@cd view && qmake && make && make clean && rm Makefile && cd ../ && mkdir build && mv view/view.app build/
+	@cd view && qmake && make && make clean && rm Makefile && cd ../ && mv view/view.app build/
 	
 uninstall:
 	@rm -rf build*
@@ -64,6 +68,7 @@ clean:
 	@rm -f *.info
 	@rm -f *.info
 	@rm -f ./*/*.gch
+	@rm -f ./*/*/*.gch
 	@rm -rf build
 	@rm -f RESULT_VALGRIND.txt
 
