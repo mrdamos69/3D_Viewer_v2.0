@@ -10,7 +10,7 @@ class Controller {
  private:
   Model model;
   static Controller *controller_;
-  Controller() { model.get_model(); }
+  Controller() {}
   ~Controller() { delete controller_; }
 
  public:

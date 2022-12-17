@@ -43,7 +43,7 @@ install:
 	@make clean
 	@mkdir build
 	@cd view && qmake && make && make clean && rm Makefile && cd ../ && mv view/view.app build/
-	
+
 uninstall:
 	@rm -rf build*
 
@@ -72,17 +72,18 @@ clean:
 	@rm -rf build
 	@rm -f RESULT_VALGRIND.txt
 
-leaks: test
-	@CK_FORK=no valgrind --vgdb=no --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./tests.o
-
 check:
-# @cp ../materials/linters/.clang-format ./
-# @cd view && clang-format -i ./*.cc ./*.h
-	@cd model && clang-format -i ./*.cc ./*.h
+	@cd view && clang-format -i ./*.cpp ./*.h
+	@cd model && clang-format -i ./*.cc ./*.h ./*/*.cc ./*/*.h
 	@cd controller && clang-format -i ./*.cc ./*.h
 	@cd matrix_lib && clang-format -i ./*.cc ./*.h
 	@cd view && clang-format -i ./*.cpp ./*.h
-# @rm -rf .clang-format
+  
+	@cd view && clang-format -n ./*.cpp ./*.h
+	@cd model && clang-format -n ./*.cc ./*.h */*.cc ./*/*.h
+	@cd controller && clang-format -n ./*.cc ./*.h
+	@cd matrix_lib && clang-format -n ./*.cc ./*.h
+	@cd view && clang-format -n ./*.cpp ./*.h
 
 cppcheck:
 	@cppcheck --enable=all --suppress=missingIncludeSystem $(ALL_FILE_CC)

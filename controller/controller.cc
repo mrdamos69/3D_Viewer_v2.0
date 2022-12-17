@@ -1,5 +1,5 @@
 #include "controller.h"
-
+s21::Controller *s21::Controller::controller_ = 0;
 int s21::Controller::is_digit(char expression) {
   return model.is_digit(expression);
 }
