@@ -43,7 +43,7 @@ Develop a program to visualise the 3D wireframe models.
 - Settings must be saved between program restarts
 
 ## Part 3. Record
- ![3dviewer2.0](obj/cat_gif_2.gif)
+ ![3dviewer2.0](obj/cat_gif.gif)
 - The program must allow saving the captured (rendered) images as bmp and jpeg files.
 - The program must allow recording small screencasts - the current custom affine transformation of the loaded object into gif-animation (640x480, 10fps, 5s) by a special button
 
