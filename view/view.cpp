@@ -15,6 +15,7 @@ void view::on_download_obj_clicked() {
   connect(this, &view::signal_color, p_test, &Widget::slot_color);
   connect(this, &view::signal_vetex_and_line, p_test,
           &Widget::slot_vetex_and_line);
+  connect(this, &view::signal_geometry, p_test, &Widget::slot_geometry);
 
   p_test->show();
   create_screen();
@@ -123,6 +124,7 @@ void view::on_stop_image_clicked() {
         this, tr("Save screenshot"), "",
         tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
     QGifImage gif;
+    gif.setDefaultDelay(100);
     QImage img = p_test->grabFramebuffer();
     for (QVector<QImage>::Iterator img = mas_image.begin();
          img != mas_image.end(); ++img) {
@@ -187,6 +189,7 @@ void view::on_change_rot_x_pressed() {
     this->coordinates[0] = M_PI / 180.0 * ui->dSpinBox_rot->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[0] = 0;
   }
 }
 
@@ -195,6 +198,7 @@ void view::on_change_rot_x2_pressed() {
     this->coordinates[0] = M_PI / 180.0 * (-ui->dSpinBox_rot->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[0] = 0;
   }
 }
 
@@ -203,6 +207,7 @@ void view::on_change_rot_y_pressed() {
     this->coordinates[1] = M_PI / 180.0 * ui->dSpinBox_rot_2->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[1] = 0;
   }
 }
 
@@ -211,6 +216,7 @@ void view::on_change_rot_y2_pressed() {
     this->coordinates[1] = M_PI / 180.0 * (-ui->dSpinBox_rot_2->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[1] = 0;
   }
 }
 
@@ -219,6 +225,7 @@ void view::on_change_rot_z_pressed() {
     this->coordinates[2] = M_PI / 180.0 * ui->dSpinBox_rot_3->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[2] = 0;
   }
 }
 
@@ -227,6 +234,7 @@ void view::on_change_rot_z2_pressed() {
     this->coordinates[2] = M_PI / 180.0 * (-ui->dSpinBox_rot_3->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[2] = 0;
   }
 }
 
@@ -235,6 +243,7 @@ void view::on_change_move_x_pressed() {
     this->coordinates[3] = ui->dSpinBox_move->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[3] = 0;
   }
 }
 
@@ -243,6 +252,7 @@ void view::on_change_move_x2_pressed() {
     this->coordinates[3] = (-ui->dSpinBox_move->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[3] = 0;
   }
 }
 
@@ -251,6 +261,7 @@ void view::on_change_move_y_pressed() {
     this->coordinates[4] = ui->dSpinBox_move_2->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[4] = 0;
   }
 }
 
@@ -259,40 +270,40 @@ void view::on_change_move_y2_pressed() {
     this->coordinates[4] = (-ui->dSpinBox_move_2->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[4] = 0;
   }
 }
 
 void view::on_change_move_z_pressed() {
   if (ui->download_obj->isCheckable()) {
-    this->coordinates[4] = ui->dSpinBox_move_3->value();
+    this->coordinates[5] = ui->dSpinBox_move_3->value();
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[5] = 0;
   }
 }
 
 void view::on_change_move_z2_pressed() {
   if (ui->download_obj->isCheckable()) {
-    this->coordinates[4] = (-ui->dSpinBox_move_3->value());
+    this->coordinates[5] = (-ui->dSpinBox_move_3->value());
     emit signal_rot_move(this->coordinates);
     create_screen();
+    this->coordinates[5] = 0;
   }
 }
 
 void view::on_radioButton_clicked() {
-    if (ui->download_obj->isCheckable()) {
-      this->click = true;
-      emit signal_geometry(this->click);
-      create_screen();
-    }
+  if (ui->download_obj->isCheckable()) {
+    this->click = true;
+    emit signal_geometry(this->click);
+    create_screen();
+  }
 }
 
-
-void view::on_radioButton_2_clicked()
-{
-    if (ui->download_obj->isCheckable()) {
-      this->click = false;
-      emit signal_geometry(this->click);
-      create_screen();
-    }
+void view::on_radioButton_2_clicked() {
+  if (ui->download_obj->isCheckable()) {
+    this->click = false;
+    emit signal_geometry(this->click);
+    create_screen();
+  }
 }
-

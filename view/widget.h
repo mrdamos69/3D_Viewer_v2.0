@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <glu.h>
+#include <GL/glu.h>
 #include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>
@@ -46,13 +46,14 @@ class Widget : public QOpenGLWidget {
   void parcing_3d_files();
   void loadSettings();
   void saveSettings();
+  void switch_geometry();
 
  public slots:
   void slot_zoom(double x);
   void slot_rot_move(QVector<double> rmz);
   void slot_color(QVector<double> color);
   void slot_vetex_and_line(QVector<int> setting);
-  void slot_geometry(bool &clicked);
+  void slot_geometry(bool clicked);
   void errors(int error);
   void change_geo();
 
