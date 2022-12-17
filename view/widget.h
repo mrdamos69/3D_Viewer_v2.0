@@ -2,8 +2,8 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <QtOpenGLWidgets/qopenglwidget.h>
 #include <GL/glu.h>
+#include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>
 #include <QMouseEvent>

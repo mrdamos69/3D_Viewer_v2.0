@@ -27,14 +27,12 @@ void Widget::clean_memory() {
     delete[] vertex;
     delete[] facets;
     for (int i = 0; i < some_data.count_of_vertex; i++)
-        delete[] some_data.polygons[i].vertexes;
+      delete[] some_data.polygons[i].vertexes;
     delete[] some_data.polygons;
   }
 }
 
-void Widget::initializeGL() {
-    glEnable(GL_DEPTH_TEST);
-}
+void Widget::initializeGL() { glEnable(GL_DEPTH_TEST); }
 
 void Widget::resizeGL(int w, int h) {
   glViewport(0, 0, w, h);
@@ -73,24 +71,25 @@ void Widget::paintGL() {
 }
 
 void Widget::switch_geometry() {
-    double min = 0.0;
-    double max = 0.0;
-    if (!path_to_file.isNull()) {
-      controller->get_max_min_frustum(&max, &min, some_data);
-    }
-    if (qFabs(min) > max) {
-      max = qFabs(min);
-    } else if (max > qFabs(min)) {
-      min = -max;
-    }
-    max *= 1.2;
-    min *= 1.2;
-    (change_geometry) ? glOrtho(min, max, min, max, 100 * min, 100 * max) : glFrustum(min, max, min, max, 100 * min, 100 * max);
+  double min = 0.0;
+  double max = 0.0;
+  if (!path_to_file.isNull()) {
+    controller->get_max_min_frustum(&max, &min, some_data);
+  }
+  if (qFabs(min) > max) {
+    max = qFabs(min);
+  } else if (max > qFabs(min)) {
+    min = -max;
+  }
+  max *= 1.2;
+  min *= 1.2;
+  (change_geometry) ? glOrtho(min, max, min, max, 100 * min, 100 * max)
+                    : glFrustum(min, max, min, max, 100 * min, 100 * max);
 }
 
 void Widget::slot_geometry(bool clicked) {
-    this->change_geometry = clicked;
-    update();
+  this->change_geometry = clicked;
+  update();
 }
 
 void Widget::print_vertex() {

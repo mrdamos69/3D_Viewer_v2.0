@@ -124,6 +124,7 @@ void view::on_stop_image_clicked() {
         this, tr("Save screenshot"), "",
         tr("GIF screenshot (*.gif);;GIF screenshot(*.gif)"));
     QGifImage gif;
+    gif.setDefaultDelay(100);
     QImage img = p_test->grabFramebuffer();
     for (QVector<QImage>::Iterator img = mas_image.begin();
          img != mas_image.end(); ++img) {
