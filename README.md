@@ -64,7 +64,7 @@ Design patterns play a crucial role in structuring the application. The project 
 1. Clone the repository:
 
     ```bash
-        git clone https://github.com/yourusername/3DViewer-v2.0.git
+        git clone https://github.com/mrdamos69/3D_Viewer_v2.0.git
         cd 3D_Viewer_v2.0
 
 
