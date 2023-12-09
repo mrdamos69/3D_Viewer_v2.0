@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
-#include <GL/glu.h>
+#include <gl.h>
 #include <QtOpenGLWidgets/qopenglwidget.h>
 
 #include <QGuiApplication>

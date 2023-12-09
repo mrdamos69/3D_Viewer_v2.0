@@ -2,45 +2,77 @@
 
 ![3dviewer2.0](obj/one.png)
 
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Information](#information)
+3. [3DViewer v2.0](#part-1-3dviewer-v20)
+4. [Bonus Settings](#part-2-bonus-settings)
+5. [Bonus Record](#part-3-bonus-record)
+
+## Introduction
+
+In this project, the goal is to implement a 3D wireframe model viewer in C++ (C++17 standard) using object-oriented programming principles. The application, named 3DViewer v2.0, extends the functionality of the previous version (3DViewer v1.0). The project follows the Google style guide and includes a Makefile for building and testing. The program utilizes the Model-View-Controller (MVC) pattern, with a focus on separating business logic and interface components.
+
+## Information
+
+### Design Patterns
+
+Design patterns play a crucial role in structuring the application. The project emphasizes the use of established design patterns, such as the Model-View-Controller (MVC) pattern. This separation of concerns ensures a clean and modular codebase, making it easier to manage both the interface and business logic.
+
 ## Part 1. 3DViewer v2.0
 
-Разработать программу для визуализации каркасной модели в трехмерном пространстве.
+### Features
 
-- Программа разработана на языке C++ стандарта C++17. 
-- Код программы находиться в папке src 
-- При написании кода придерживается Google Style
-- Сборка программы настроена с помощью Makefile со стандартным набором целей для GNU-программ: all, install, uninstall, clean, dvi, dist, tests. Установка должна вестись в любой другой произвольный каталог 
-- Программа разработана в соответствии с принципами объектно-ориентированного программирования, структурный подход запрещен
-- Обеспечено полное покрытие unit-тестами модулей, связанных с загрузкой моделей и аффинными преобразованиями
-- Программа предоставляет возможность:
-    - Загружать каркасную модель из файла формата obj (поддержка только списка вершин и поверхностей).
-    - Перемещать модель на заданное расстояние относительно осей X, Y, Z.
-    - Поворачивать модель на заданный угол относительно своих осей X, Y, Z.
-    - Масштабировать модель на заданное значение.
-- В программе реализован графический пользовательский интерфейс, на базе GUI-библиотеки с API для C++ (Qt)
-- Графический пользовательский интерфейс содержит:
-    - Кнопку для выбора файла с моделью и поле для вывода его названия.
-    - Зону визуализации каркасной модели.
-    - Кнопку/кнопки и поля ввода для перемещения модели. 
-    - Кнопку/кнопки и поля ввода для поворота модели. 
-    - Кнопку/кнопки и поля ввода для масштабирования модели.  
-    - Информацию о загруженной модели - название файла, кол-во вершин и ребер.
-- Программа корректно обрабатывает и позволяет пользователю просматривать модели с деталями до 100, 1000, 10 000, 100 000, 1 000 000 вершин без зависания (зависание - это бездействие интерфейса более 0,5 секунды).
-- Программа реализована с использованием паттерна MVC, то есть:
-    - нет кода бизнес-логики в коде представлений
-    - нет кода интерфейса в контроллере и в модели
-    - контроллеры тонкие
-- Классы реализованы внутри пространства имен `s21`
-- Для осуществления афинных преобразований использоваться матрицы из библиотеки из предыдущего проекта s21_matrix+
+- Load wireframe models from an obj file (supporting vertices and surfaces list only).
+- Translate the model by a given distance along the X, Y, Z axes.
+- Rotate the model by a given angle along its X, Y, Z axes.
+- Scale the model by a given value.
+- GUI implementation using a C++ GUI library (e.g., Qt, SFML, GTK+, Nanogui, Nngui).
+- Visualization area for wireframe models.
+- Buttons and input fields for translation, rotation, and scaling.
+- Display model information: file name, number of vertices, and edges.
+- Support for viewing models with varying vertex counts without freezing.
+- Usage of matrices from the s21_matrix+ project for affine transformations.
 
-## Part 2. Настройки
+### Implementation Details
 
-- Программа позволяет настраивать тип проекции (параллельная и центральная)
-- Программа позволяет настраивать тип (сплошная, пунктирная), цвет и толщину ребер, способ отображения (отсутствует, круг, квадрат), цвет и размер вершин
-- Программа позволяет выбирать цвет фона
-- Настройки сохраняться между перезапусками программы
+- MVC pattern with thin controllers.
+- Three different design patterns integrated (e.g., facade, strategy, command).
+- All classes implemented within the `s21` namespace.
 
-## Part 3. Запись
+## Part 2. Bonus. Settings
+
+### Additional Features
+
+- Customizable projection type (parallel and central).
+- Configuration options for edge type (solid, dashed), color, and thickness.
+- Display options for vertices (none, circle, square), customizable color, and size.
+- Background color customization.
+- Settings persistence between program restarts.
+
+## Part 3. Bonus. Record
 ![3dviewer2.0](obj/cat_gif.gif)
-- Программа позволяет сохранять полученные ("отрендеренные") изображения в файл в форматах bmp и jpeg
-- Программа позволяет по специальной кнопке записывать небольшие "скринкасты" - текущие пользовательские аффинные преобразования загруженного объекта в gif-анимацию (640x480, 10fps, 5s)
+### Additional Feature
+
+- Save captured images as BMP and JPEG files.
+- Record small screencasts of the current affine transformation into GIF animations.
+- GIF settings: 640x480 resolution, 10fps, 5-second duration.
+
+## Building and Running the Project
+
+1. Clone the repository:
+
+    ```bash
+        git clone https://github.com/yourusername/3DViewer-v2.0.git
+        cd 3D_Viewer_v2.0
+
+
+2. **Build the project:**
+    ```bash
+        make install
+
+## Contributors
+[Dmitrii Chichkanov (mrdamos69)](https://github.com/mrdamos69)
+
+[Ayzat Akhmetzyanov (AjzSAhmetzyanov)](https://github.com/AjzSAhmetzyanov)
