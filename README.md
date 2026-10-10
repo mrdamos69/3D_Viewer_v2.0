@@ -1,78 +1,51 @@
-# 3DViewer v2.0
+# 3D wireframe viewer
 
-![3dviewer2.0](obj/one.png)
+A C++17 desktop application for loading OBJ models and exploring them with Qt and OpenGL. The code separates parsing, geometric transformations and rendering through a model-view-controller structure.
 
-## Table of Contents
+![Wireframe viewer interface](obj/one.png)
 
-1. [Introduction](#introduction)
-2. [Information](#information)
-3. [3DViewer v2.0](#part-1-3dviewer-v20)
-4. [Bonus Settings](#part-2-bonus-settings)
-5. [Bonus Record](#part-3-bonus-record)
+## Capabilities
 
-## Introduction
+- Parse OBJ vertex and face data into a wireframe representation.
+- Translate, rotate and scale the model.
+- Switch projection and adjust line, vertex and background settings.
+- Persist display settings with QSettings.
+- Capture the viewport and export a GIF sequence.
 
-In this project, the goal is to implement a 3D wireframe model viewer in C++ (C++17 standard) using object-oriented programming principles. The application, named 3DViewer v2.0, extends the functionality of the previous version (3DViewer v1.0). The project follows the Google style guide and includes a Makefile for building and testing. The program utilizes the Model-View-Controller (MVC) pattern, with a focus on separating business logic and interface components.
+![Existing recording of a wireframe model](obj/cat_gif.gif)
 
-## Information
+## Code walkthrough
 
-### Design Patterns
+| Area | What it demonstrates |
+|---|---|
+| [OBJ parser](model/parser/) | File parsing and geometry input |
+| [Transformations](model/transform/) | Geometric operations |
+| [Matrix library](matrix_lib/) | Matrix operations used by the viewer |
+| [Controller](controller/) | Connection between model and interface |
+| [OpenGL widget](view/widget.cpp) | Rendering, projections and display settings |
+| [Qt view](view/view.cpp) | Interaction and image export |
+| [Tests](unit_test/unit_test.cc) | GoogleTest cases for the model |
 
-Design patterns play a crucial role in structuring the application. The project emphasizes the use of established design patterns, such as the Model-View-Controller (MVC) pattern. This separation of concerns ensures a clean and modular codebase, making it easier to manage both the interface and business logic.
+## Build
 
-## Part 1. 3DViewer v2.0
+Open [view/view.pro](view/view.pro) in Qt Creator using a Qt 6 desktop kit with Widgets, OpenGL and OpenGLWidgets, plus a C++17 compiler.
 
-### Features
+The existing Makefile exposes these entry points:
 
-- Load wireframe models from an obj file (supporting vertices and surfaces list only).
-- Translate the model by a given distance along the X, Y, Z axes.
-- Rotate the model by a given angle along its X, Y, Z axes.
-- Scale the model by a given value.
-- GUI implementation using a C++ GUI library (e.g., Qt, SFML, GTK+, Nanogui, Nngui).
-- Visualization area for wireframe models.
-- Buttons and input fields for translation, rotation, and scaling.
-- Display model information: file name, number of vertices, and edges.
-- Support for viewing models with varying vertex counts without freezing.
-- Usage of matrices from the s21_matrix+ project for affine transformations.
+```bash
+make install
+make test
+```
 
-### Implementation Details
+The install target expects qmake on PATH and a macOS `.app` bundle. The test target requires GoogleTest. Build setup may need adjustment on other platforms; no fresh cross-platform build or performance benchmark is claimed.
 
-- MVC pattern with thin controllers.
-- Three different design patterns integrated (e.g., facade, strategy, command).
-- All classes implemented within the `s21` namespace.
+## Project scope
 
-## Part 2. Bonus. Settings
+An earlier collaborative desktop-engineering project. The repository includes example models, screenshots and a recording. The screenshots show the existing interface, not a redesigned mockup.
 
-### Additional Features
-
-- Customizable projection type (parallel and central).
-- Configuration options for edge type (solid, dashed), color, and thickness.
-- Display options for vertices (none, circle, square), customizable color, and size.
-- Background color customization.
-- Settings persistence between program restarts.
-
-## Part 3. Bonus. Record
-![3dviewer2.0](obj/cat_gif.gif)
-### Additional Feature
-
-- Save captured images as BMP and JPEG files.
-- Record small screencasts of the current affine transformation into GIF animations.
-- GIF settings: 640x480 resolution, 10fps, 5-second duration.
-
-## Building and Running the Project
-
-1. Clone the repository:
-
-    ```bash
-        git clone https://github.com/mrdamos69/3D_Viewer_v2.0.git
-        cd 3D_Viewer_v2.0
-
-
-2. **Build the project:**
-    ```bash
-        make install
+The GIF export uses the bundled [QtGifImage library](QtGifImage-master/README.md). Its original attribution and license files remain in the repository.
 
 ## Contributors
-[Dmitrii Chichkanov (mrdamos69)](https://github.com/mrdamos69)
 
-[Ayzat Akhmetzyanov (AjzSAhmetzyanov)](https://github.com/AjzSAhmetzyanov)
+- [Dmitrii Chichkanov](https://github.com/mrdamos69)
+- [Ayzat Akhmetzyanov](https://github.com/AjzSAhmetzyanov)
